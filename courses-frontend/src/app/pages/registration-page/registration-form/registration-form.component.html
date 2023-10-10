@@ -4,6 +4,7 @@
     <mat-form-field class="col-md-8">
       <mat-label>Nazwa użytkownika</mat-label>
       <input type="text" matInput formControlName="username">
+      <mat-error *ngIf="hasError('username')">{{getError('username')}}</mat-error>
     </mat-form-field>
 
     <mat-form-field class="col-md-4">
@@ -11,6 +12,7 @@
       <mat-select formControlName="role">
         <mat-option *ngFor="let role of roles" [value]="role.role">{{ role.name }}</mat-option>
       </mat-select>
+      <mat-error *ngIf="hasError('role')">{{getError('role')}}</mat-error>
     </mat-form-field>
   </div>
 
@@ -18,6 +20,7 @@
     <mat-form-field class="col">
       <mat-label>E-mail</mat-label>
       <input type="email" matInput formControlName="email">
+      <mat-error *ngIf="hasError('email')">{{getError('email')}}</mat-error>
     </mat-form-field>
   </div>
 
@@ -25,11 +28,13 @@
     <mat-form-field class="col">
       <mat-label>Imię</mat-label>
       <input type="text" matInput formControlName="firstName">
+      <mat-error *ngIf="hasError('firstName')">{{getError('firstName')}}</mat-error>
     </mat-form-field>
 
     <mat-form-field class="col">
       <mat-label>Nazwisko</mat-label>
       <input type="text" matInput formControlName="lastName">
+      <mat-error *ngIf="hasError('lastName')">{{getError('lastName')}}</mat-error>
     </mat-form-field>
   </div>
 
@@ -37,6 +42,7 @@
     <mat-form-field class="col">
       <mat-label>Hasło</mat-label>
       <input type="password" matInput formControlName="password">
+      <mat-error *ngIf="hasError('password')">{{getError('password')}}</mat-error>
     </mat-form-field>
   </div>
 
@@ -44,6 +50,7 @@
     <mat-form-field class="col">
       <mat-label>Potwierdź hasło</mat-label>
       <input type="password" matInput formControlName="confirmPassword">
+      <mat-error *ngIf="hasError('confirmPassword')">{{getError('confirmPassword')}}</mat-error>
     </mat-form-field>
   </div>
 

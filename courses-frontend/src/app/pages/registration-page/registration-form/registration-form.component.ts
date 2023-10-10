@@ -6,6 +6,7 @@ import { MatOptionModule } from "@angular/material/core";
 import { MatSelectModule } from "@angular/material/select";
 import { roles } from "../../../auth/models/role.enum";
 import { FormGroup, ReactiveFormsModule } from "@angular/forms";
+import { ErrorHandlerForm } from "../../../errors/custom-errors";
 
 @Component({
   selector: 'app-registration-form',
@@ -14,7 +15,7 @@ import { FormGroup, ReactiveFormsModule } from "@angular/forms";
   templateUrl: './registration-form.component.html',
   styleUrls: ['./registration-form.component.scss']
 })
-export class RegistrationFormComponent {
+export class RegistrationFormComponent extends ErrorHandlerForm {
   @Input() formGroup?: FormGroup;
   readonly roles = roles;
 }
