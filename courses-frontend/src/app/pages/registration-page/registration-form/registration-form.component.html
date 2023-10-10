@@ -1,0 +1,50 @@
+<form *ngIf="formGroup" [formGroup]="formGroup">
+
+  <div class="row">
+    <mat-form-field class="col-md-8">
+      <mat-label>Nazwa użytkownika</mat-label>
+      <input type="text" matInput formControlName="username">
+    </mat-form-field>
+
+    <mat-form-field class="col-md-4">
+      <mat-label>Typ użytkownika</mat-label>
+      <mat-select formControlName="role">
+        <mat-option *ngFor="let role of roles" [value]="role.role">{{ role.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <mat-form-field class="col">
+      <mat-label>E-mail</mat-label>
+      <input type="email" matInput formControlName="email">
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <mat-form-field class="col">
+      <mat-label>Imię</mat-label>
+      <input type="text" matInput formControlName="firstName">
+    </mat-form-field>
+
+    <mat-form-field class="col">
+      <mat-label>Nazwisko</mat-label>
+      <input type="text" matInput formControlName="lastName">
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <mat-form-field class="col">
+      <mat-label>Hasło</mat-label>
+      <input type="password" matInput formControlName="password">
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <mat-form-field class="col">
+      <mat-label>Potwierdź hasło</mat-label>
+      <input type="password" matInput formControlName="confirmPassword">
+    </mat-form-field>
+  </div>
+
+</form>
