@@ -11,7 +11,7 @@ export class AuthService {
     return this._apiService.post<{token: string | null, role?: Role}>('/login', data);
   }
   register(data: any) {
-    return this._apiService.post('/register', data);
+    return this._apiService.post<{message?: string}>('/register', data);
   }
   setToken(token: string) {
     localStorage.setItem('token', token);
