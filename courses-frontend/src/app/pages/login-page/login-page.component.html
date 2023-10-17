@@ -1,1 +1,31 @@
-<p>login-page works!</p>
+<section>
+  <mat-card class="form-box">
+    <div class="d-flex justify-content-between align-items-center header">
+      <h1 class="m-0">Zaloguj się</h1>
+      <a [routerLink]="'/register'" color="primary" mat-raised-button>
+        Zarejestruj się
+        <mat-icon iconPositionEnd>arrow_forward</mat-icon>
+      </a>
+    </div>
+    <form [formGroup]="formGroup">
+
+      <div class="row">
+        <mat-form-field>
+          <mat-label>Nazwa użytkownika</mat-label>
+          <input type="text" matInput formControlName="username">
+          <mat-error *ngIf="hasError('username')">{{getError('username')}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field>
+          <mat-label>Hasło</mat-label>
+          <input type="password" matInput formControlName="password">
+          <mat-error *ngIf="hasError('password')">{{getError('password')}}</mat-error>
+        </mat-form-field>
+      </div>
+
+    </form>
+    <button (click)="login()" class="p-4" mat-raised-button color="primary">Zaloguj się</button>
+  </mat-card>
+</section>

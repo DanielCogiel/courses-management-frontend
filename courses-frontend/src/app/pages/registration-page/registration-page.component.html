@@ -3,11 +3,11 @@
     <div class="d-flex justify-content-between align-items-center header">
       <h1 class="m-0">Zarejestruj się</h1>
       <a [routerLink]="'/login'" color="primary" mat-raised-button>
-        Login
+        Zaloguj się
         <mat-icon iconPositionEnd>arrow_forward</mat-icon>
       </a>
     </div>
     <app-registration-form [formGroup]="formGroup"></app-registration-form>
-    <button (click)="registerUser()" class="p-4" mat-raised-button color="primary">Register</button>
+    <button (click)="registerUser()" class="p-4" mat-raised-button color="primary">Zarejestruj się</button>
   </mat-card>
 </section>

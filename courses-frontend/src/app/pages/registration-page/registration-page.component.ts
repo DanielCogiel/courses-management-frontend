@@ -10,6 +10,7 @@ import passwordMatchValidator from "../../validators/password-match.validator";
 import { AuthService } from "../../auth/auth.service";
 import { Router, RouterLink } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { first } from "rxjs";
 
 @Component({
   selector: 'app-registration-page',
@@ -38,6 +39,7 @@ export class RegistrationPageComponent {
     this.formGroup.markAllAsTouched();
     if (this.formGroup.valid) {
       this._auth.register(this.formGroup.value)
+        .pipe(first())
         .subscribe({
           next: value => {
             this._snackbar.open(value.body?.message || 'Udało się zarejestrować.', 'Zamknij', {
