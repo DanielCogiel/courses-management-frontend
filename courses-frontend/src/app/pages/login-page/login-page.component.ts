@@ -39,10 +39,12 @@ export class LoginPageComponent extends ErrorHandlerForm {
         .pipe(first())
         .subscribe({
           next: response => {
-            this._auth.setToken(response.body?.token);
-            this._auth.setRole(response.body?.role);
+            this._auth.setAccessToken(response.body?.token);
+            // this._auth.setRole(response.body?.role);
             this._router.navigate(['']);
-            this._snackbar.open(response.body?.message || 'Witamy!');
+            this._snackbar.open(response.body?.message || 'Witamy!', 'Zamknij', {
+              duration: 5 * 1000
+            });
           },
           error: error => this._snackbar.open(error.message)
         })

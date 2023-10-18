@@ -4,7 +4,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatOptionModule } from "@angular/material/core";
 import { MatSelectModule } from "@angular/material/select";
-import { roles } from "../../../auth/models/role.enum";
+import { roles } from "../../../data-access/role/role.enum";
 import { FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { ErrorHandlerForm } from "../../../errors/custom-errors";
 

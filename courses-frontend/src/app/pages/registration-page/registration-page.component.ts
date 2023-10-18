@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import Role from "../../auth/models/role.enum";
+import Role from "../../data-access/role/role.enum";
 import { RegistrationFormComponent } from "./registration-form/registration-form.component";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";

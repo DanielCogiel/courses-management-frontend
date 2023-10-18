@@ -1,0 +1,40 @@
+@import '../../styles/scss/variables';
+
+section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 90px;
+  padding: 10px 20px;
+  border-bottom: 2px solid $main-color;
+  background-color: $main-color-lighter;
+
+  .left-section {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    h1 {
+      font-family: 'Pixelify Sans', sans-serif;
+      margin: 0;
+      font-weight: bold;
+      color: white;
+    }
+  }
+  .right-section {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    .leave-icon {
+      color: white;
+    }
+  }
+}
