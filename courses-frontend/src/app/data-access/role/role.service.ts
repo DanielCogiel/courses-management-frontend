@@ -6,9 +6,12 @@ import Role from "./role.enum";
   providedIn: 'root'
 })
 export class RoleService {
-  role$: BehaviorSubject<Role | null> = new BehaviorSubject<Role | null>(null);
-  setRole(role: Role | null) {
+  role$: BehaviorSubject<Role | null | undefined> = new BehaviorSubject<Role | null | undefined>(null);
+  setRole(role?: Role | null) {
     this.role$.next(role);
+  }
+  getRole() {
+    return this.role$.getValue();
   }
   constructor() { }
 }

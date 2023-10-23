@@ -14,7 +14,5 @@ export class UserButtonComponent {
     map(response => response.body),
     map(data => data?.data)
   );
-  constructor(private _userDataService: UserDataService) {
-    this.user$.subscribe(value => console.log(value))
-  }
+  constructor(private _userDataService: UserDataService) {}
 }
