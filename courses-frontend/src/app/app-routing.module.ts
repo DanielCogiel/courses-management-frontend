@@ -8,10 +8,15 @@ const routes: Routes = [
     loadComponent: () => import('./layouts/main-layout/main-layout.component').then(c => c.MainLayoutComponent),
     children: [
       {
-        path: '',
+        path: 'kursy',
         canActivate: [AuthenticatedGuard],
         loadComponent: () => import('./pages/courses-page/courses-page.component').then(c => c.CoursesPageComponent)
       },
+      {
+        path: 'kursy',
+        canActivate: [AuthenticatedGuard],
+        loadChildren: () => import('./pages/course-create-edit/course-create-edit.module').then(m => m.CourseCreateEditModule)
+      }
     ]
   },
   {

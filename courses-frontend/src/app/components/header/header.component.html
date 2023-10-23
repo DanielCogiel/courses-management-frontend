@@ -4,9 +4,13 @@
     <h1>Kursy 2.0</h1>
   </div>
   <div class="right-section">
-    <button mat-raised-button>Wszystkie kursy</button>
+    <button [routerLink]="'kursy'" mat-raised-button>Wszystkie kursy</button>
     <button mat-raised-button>Moje kursy</button>
-    <button *hasRoles="['ADMIN', 'CREATOR']" mat-raised-button>Stwórz nowy kurs</button>
+    <a
+      *hasRoles="['ADMIN', 'CREATOR']"
+      mat-raised-button
+      [routerLink]="'kursy/utworz'"
+    >Stwórz nowy kurs</a>
     <app-timer></app-timer>
     <app-user-button></app-user-button>
     <button mat-icon-button (click)="logout()">

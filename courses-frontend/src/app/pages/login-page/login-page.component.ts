@@ -43,7 +43,7 @@ export class LoginPageComponent extends ErrorHandlerForm {
           next: response => {
             this._auth.setAccessToken(response.body?.token);
             this._roleService.setRole(response.body?.role);
-            this._router.navigate(['']);
+            this._router.navigate(['kursy']);
             this._snackbar.open(response.body?.message || 'Witamy!', 'Zamknij', {
               duration: 5 * 1000
             });
