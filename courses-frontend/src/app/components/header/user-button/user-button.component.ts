@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserDataService } from "../../../data-access/user/user-data.service";
-import { Observable } from "rxjs";
+import { first, map, Observable } from "rxjs";
 import User from "../../../data-access/user/user.model";
 
 @Component({
@@ -9,6 +9,12 @@ import User from "../../../data-access/user/user.model";
   styleUrls: ['./user-button.component.scss']
 })
 export class UserButtonComponent {
-  user$: Observable<User | null> = this._userDataService.user$.asObservable();
-  constructor(private _userDataService: UserDataService) {}
+  user$: Observable<User | undefined> = this._userDataService.getUser().pipe(
+    first(),
+    map(response => response.body),
+    map(data => data?.data)
+  );
+  constructor(private _userDataService: UserDataService) {
+    this.user$.subscribe(value => console.log(value))
+  }
 }

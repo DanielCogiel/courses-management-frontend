@@ -3,7 +3,14 @@
 #timer {
   background-color: white;
   border-radius: 4px;
-  padding: 7px 16px;
+  height: 38px;
+  padding: 0 16px;
   font-weight: bold;
   border: 2px solid $detail-color;
+  display: flex;
+  align-items: center;
+
+  mat-icon {
+    margin-right: 5px;
+  }
 }
