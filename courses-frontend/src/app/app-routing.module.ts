@@ -5,8 +5,14 @@ import { AuthenticatedGuard } from "./guards/authenticated.guard";
 const routes: Routes = [
   {
     path: '',
-    canActivate: [AuthenticatedGuard],
-    loadComponent: () => import('./pages/courses-page/courses-page.component').then(c => c.CoursesPageComponent)
+    loadComponent: () => import('./layouts/main-layout/main-layout.component').then(c => c.MainLayoutComponent),
+    children: [
+      {
+        path: '',
+        canActivate: [AuthenticatedGuard],
+        loadComponent: () => import('./pages/courses-page/courses-page.component').then(c => c.CoursesPageComponent)
+      },
+    ]
   },
   {
     path: 'register',

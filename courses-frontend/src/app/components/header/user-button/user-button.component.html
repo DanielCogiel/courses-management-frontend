@@ -1,0 +1,4 @@
+<button *ngIf="user$ | async as user" class="user-button">
+  <mat-icon>account_circle</mat-icon>
+  {{ user.username }}
+</button>

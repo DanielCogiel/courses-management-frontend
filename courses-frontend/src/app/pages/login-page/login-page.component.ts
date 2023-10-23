@@ -11,6 +11,7 @@ import { ErrorHandlerForm } from "../../errors/custom-errors";
 import { AuthService } from "../../auth/auth.service";
 import { first } from "rxjs";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { RoleService } from "../../data-access/role/role.service";
 
 @Component({
   selector: 'app-login-page',
@@ -27,6 +28,7 @@ export class LoginPageComponent extends ErrorHandlerForm {
   constructor(
     private _fb: FormBuilder,
     private _auth: AuthService,
+    private _roleService: RoleService,
     private _router: Router,
     private _snackbar: MatSnackBar
   ) {
@@ -39,10 +41,12 @@ export class LoginPageComponent extends ErrorHandlerForm {
         .pipe(first())
         .subscribe({
           next: response => {
-            this._auth.setToken(response.body?.token);
-            this._auth.setRole(response.body?.role);
+            this._auth.setAccessToken(response.body?.token);
+            this._roleService.setRole(response.body?.role);
             this._router.navigate(['']);
-            this._snackbar.open(response.body?.message || 'Witamy!');
+            this._snackbar.open(response.body?.message || 'Witamy!', 'Zamknij', {
+              duration: 5 * 1000
+            });
           },
           error: error => this._snackbar.open(error.message)
         })
