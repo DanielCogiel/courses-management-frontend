@@ -1,1 +1,44 @@
-<p>course-create-edit-form works!</p>
+<form *ngIf="formGroup" [formGroup]="formGroup">
+
+  <div class="row">
+    <mat-form-field>
+      <mat-label>Nazwa</mat-label>
+      <input type="text" matInput formControlName="title">
+      <mat-error *ngIf="hasError('title')">{{ getError('title') }}</mat-error>
+    </mat-form-field>
+
+    <input id="fileInput" type="file" [style.display]="'none'">
+    <label for="fileInput">Wybierz obraz</label>
+  </div>
+
+</form>
+
+<form [formGroup]="lessonFormGroup">
+  <div class="row lesson-row">
+    <mat-form-field class="col-md-4">
+      <mat-label>Wybierz datę</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="col-md-3">
+      <input matInput type="time" formControlName="timeStart">
+    </mat-form-field>
+
+    <mat-form-field class="col-md-3">
+      <input matInput type="time" formControlName="timeFinish">
+    </mat-form-field>
+
+    <button color="primary" class="col-md-2 add-date-button" mat-raised-button (click)="pushDate()">Dodaj</button>
+  </div>
+
+</form>
+
+<mat-chip-set>
+  <mat-chip *ngFor="let date of datetimes; let i = index" (removed)="deleteDate(i)">
+    {{ date.date + ' ' + date.timeStart + ' - ' + date.timeFinish }}
+    <button matChipRemove><mat-icon>cancel</mat-icon></button>
+  </mat-chip>
+</mat-chip-set>

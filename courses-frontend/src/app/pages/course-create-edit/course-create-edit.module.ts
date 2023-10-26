@@ -6,6 +6,11 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
 import { CourseCreateEditFormComponent } from './course-create-edit-form/course-create-edit-form.component';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatChipsModule } from "@angular/material/chips";
 
 @NgModule({
   declarations: [
@@ -27,6 +32,12 @@ import { CourseCreateEditFormComponent } from './course-create-edit-form/course-
     MatButtonModule,
     MatCardModule,
     MatIconModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    FormsModule,
+    MatChipsModule,
   ]
 })
 export class CourseCreateEditModule { }

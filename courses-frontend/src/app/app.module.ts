@@ -7,6 +7,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { TokenInterceptor } from "./interceptors/token.interceptor";
 import { HeaderModule } from "./components/header/header.module";
 import { CourseCreateEditModule } from "./pages/course-create-edit/course-create-edit.module";
+import { MatNativeDateModule } from "@angular/material/core";
+
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { CourseCreateEditModule } from "./pages/course-create-edit/course-create
     BrowserAnimationsModule,
     HttpClientModule,
     HeaderModule,
-    CourseCreateEditModule
+    CourseCreateEditModule,
+    MatNativeDateModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true
