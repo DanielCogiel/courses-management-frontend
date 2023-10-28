@@ -3,6 +3,10 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@ang
 import { ErrorHandlerForm } from "../../../errors/custom-errors";
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 import { DateAdapter } from "@angular/material/core";
+import { roles } from "../../../data-access/role/role.enum";
+import { levels } from "../../../data-access/level/level.enum";
+import { languages } from "../../../data-access/language/language.enum";
+import { UserCreateModel } from "../models/user-create-edit.model";
 
 @Component({
   selector: 'app-course-create-edit-form',
@@ -16,8 +20,14 @@ export class CourseCreateEditFormComponent extends ErrorHandlerForm {
     timeStart: [''],
     timeFinish: ['']
   })
-  datetimes: {date: string, timeStart: string, timeFinish: string} [] = [];
-  constructor(private _fb: FormBuilder, private _dateAdapter: DateAdapter<any>) {
+  @Input() datetimes: {date: string, timeStart: string, timeFinish: string} [] = [];
+  @Input() users: UserCreateModel [] | null = null;
+  readonly levels = levels;
+  readonly languages = languages;
+  constructor(
+    private _fb: FormBuilder,
+    private _dateAdapter: DateAdapter<any>
+  ) {
     super();
   }
   pushDate() {
@@ -25,7 +35,7 @@ export class CourseCreateEditFormComponent extends ErrorHandlerForm {
       return;
     const dateObj = this._composeDateObject();
     if (dateObj) {
-      this.datetimes = [...this.datetimes, dateObj];
+      this.datetimes.push(dateObj);
       this.lessonFormGroup.reset();
     }
   }
@@ -48,4 +58,6 @@ export class CourseCreateEditFormComponent extends ErrorHandlerForm {
   deleteDate(index: number) {
     this.datetimes.splice(index, 1);
   }
+
+  protected readonly roles = roles;
 }

@@ -11,33 +11,37 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatChipsModule } from "@angular/material/chips";
+import { MatOptionModule } from "@angular/material/core";
+import { MatSelectModule } from "@angular/material/select";
 
 @NgModule({
   declarations: [
     CourseCreateEditComponent,
     CourseCreateEditFormComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild([
-      {
-        path: 'edytuj',
-        component: CourseCreateEditComponent
-      },
-      {
-        path: 'utworz',
-        component: CourseCreateEditComponent
-      }
-    ]),
-    MatButtonModule,
-    MatCardModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    FormsModule,
-    MatChipsModule,
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild([
+            {
+                path: 'edytuj',
+                component: CourseCreateEditComponent
+            },
+            {
+                path: 'utworz',
+                component: CourseCreateEditComponent
+            }
+        ]),
+        MatButtonModule,
+        MatCardModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule,
+        FormsModule,
+        MatChipsModule,
+        MatOptionModule,
+        MatSelectModule,
+    ]
 })
 export class CourseCreateEditModule { }

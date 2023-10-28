@@ -6,10 +6,50 @@
       <input type="text" matInput formControlName="title">
       <mat-error *ngIf="hasError('title')">{{ getError('title') }}</mat-error>
     </mat-form-field>
-
-    <input id="fileInput" type="file" [style.display]="'none'">
-    <label for="fileInput">Wybierz obraz</label>
   </div>
+
+  <div class="row">
+
+    <mat-form-field class="col">
+      <mat-label>Język</mat-label>
+      <mat-select formControlName="language">
+        <mat-option *ngFor="let language of languages" [value]="language.value">{{ language.label }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="hasError('language')">{{getError('language')}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="col">
+      <mat-label>Poziom</mat-label>
+      <mat-select formControlName="level">
+        <mat-option *ngFor="let level of levels" [value]="level.value">{{ level.label }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="hasError('level')">{{getError('level')}}</mat-error>
+    </mat-form-field>
+
+  </div>
+  <div class="row">
+
+    <mat-form-field class="col">
+      <mat-label>Trener</mat-label>
+      <mat-select formControlName="trainer">
+        <mat-option *ngFor="let creator of users" [value]="creator.id">
+          {{ creator.firstName + ' ' + creator.lastName + ' (' + creator.username + ')' }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="hasError('trainer')">{{getError('trainer')}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="col">
+      <mat-label>Lokalizacja</mat-label>
+      <input matInput type="text" formControlName="location">
+      <mat-error *ngIf="hasError('location')">{{getError('location')}}</mat-error>
+    </mat-form-field>
+
+
+  </div>
+<!--    <input id="fileInput" type="file" [style.display]="'none'">-->
+<!--    <label for="fileInput">Wybierz obraz</label>-->
+
 
 </form>
 
