@@ -1,11 +1,16 @@
 <form *ngIf="formGroup" [formGroup]="formGroup">
 
   <div class="row">
-    <mat-form-field>
+    <mat-form-field class="col-md-9">
       <mat-label>Nazwa</mat-label>
       <input type="text" matInput formControlName="title">
       <mat-error *ngIf="hasError('title')">{{ getError('title') }}</mat-error>
     </mat-form-field>
+
+    <div class="col-md-3 file-uploader">
+      <input id="fileInput" type="file" (change)="chooseImage($event)">
+      <label for="fileInput">Wybierz obraz</label>
+    </div>
   </div>
 
   <div class="row">
@@ -47,9 +52,6 @@
 
 
   </div>
-<!--    <input id="fileInput" type="file" [style.display]="'none'">-->
-<!--    <label for="fileInput">Wybierz obraz</label>-->
-
 
 </form>
 
@@ -71,7 +73,7 @@
       <input matInput type="time" formControlName="timeFinish">
     </mat-form-field>
 
-    <button color="primary" class="col-md-2 add-date-button" mat-raised-button (click)="pushDate()">Dodaj</button>
+    <button color="primary" class="col-md-1 add-date-button" mat-raised-button (click)="pushDate()">Dodaj</button>
   </div>
 
 </form>

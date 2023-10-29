@@ -1,6 +1,29 @@
-.lesson-row {
+@import '../../../styles/scss/variables';
 
+.lesson-row {
   button {
     height: 56px;
+    padding: 0 71px;
+  }
+}
+
+.file-uploader {
+  input {
+    display: none;
+  }
+  label {
+    padding: 18px;
+    text-align: center;
+    background-color: $main-color;
+    color: white;
+    font-weight: 500;
+    width: 100%;
+    height: 56px;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.9;
+    }
   }
 }

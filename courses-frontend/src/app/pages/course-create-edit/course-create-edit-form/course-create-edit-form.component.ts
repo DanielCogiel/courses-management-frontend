@@ -40,7 +40,7 @@ export class CourseCreateEditFormComponent extends ErrorHandlerForm {
     }
   }
   private _formatDate(date: Date) {
-    return `${date.getDay().toString().padStart(2, '0')}.${date.getMonth().toString().padStart(2, '0')}.${date.getFullYear()}`
+    return `${date.getFullYear()}-${date.getMonth().toString().padStart(2, '0')}-${date.getDay().toString().padStart(2, '0')}`
   }
   private _composeDateObject() {
     const date = this.lessonFormGroup?.getRawValue()?.date;
@@ -58,6 +58,11 @@ export class CourseCreateEditFormComponent extends ErrorHandlerForm {
   deleteDate(index: number) {
     this.datetimes.splice(index, 1);
   }
+  chooseImage(event: any) {
+    if (!event.target.value) return;
 
-  protected readonly roles = roles;
+    this.formGroup?.patchValue({
+      image: event.target.files[0]
+    })
+  }
 }

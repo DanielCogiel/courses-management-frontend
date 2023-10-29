@@ -23,7 +23,7 @@ import { MatSelectModule } from "@angular/material/select";
         CommonModule,
         RouterModule.forChild([
             {
-                path: 'edytuj',
+                path: 'edytuj/:id',
                 component: CourseCreateEditComponent
             },
             {
