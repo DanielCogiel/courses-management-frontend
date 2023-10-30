@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthenticatedGuard } from "./guards/authenticated.guard";
+import { RoleGuard } from "./guards/role.guard";
+import Role from "./data-access/role/role.enum";
 
 const routes: Routes = [
   {
@@ -14,7 +16,10 @@ const routes: Routes = [
       },
       {
         path: 'kursy',
-        canActivate: [AuthenticatedGuard],
+        canActivate: [AuthenticatedGuard, RoleGuard],
+        data: {
+          roles: [Role.CREATOR, Role.ADMIN]
+        },
         loadChildren: () => import('./pages/course-create-edit/course-create-edit.module').then(m => m.CourseCreateEditModule)
       }
     ]

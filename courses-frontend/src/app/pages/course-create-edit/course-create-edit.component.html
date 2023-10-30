@@ -1,7 +1,7 @@
-<section>
+<section *ngIf="!loading; else loader">
   <mat-card class="form-box">
     <div class="d-flex justify-content-between align-items-center header">
-      <h1 class="m-0">Tworzenie kursu</h1>
+      <h1 class="m-0">{{ id ? 'Edycja kursu' : 'Tworzenie kursu' }}</h1>
       <a [routerLink]="'kursy'" color="primary" mat-raised-button>
         Do kursów
         <mat-icon iconPositionEnd>arrow_forward</mat-icon>
@@ -12,6 +12,17 @@
       [datetimes]="datetimes"
       [users]="users$ | async"
     ></app-course-create-edit-form>
-    <button class="p-4" mat-raised-button color="primary" (click)="addCourse()">Utwórz kurs</button>
+    <button class="p-4" mat-raised-button color="primary" (click)="submitCourse()">
+      <ng-container *ngIf="!submitLoading; else submitLoader">
+        {{ id ? 'Zaktualizuj kurs' : 'Utwórz kurs' }}
+      </ng-container>
+      <ng-template #submitLoader>
+        Ładowanie
+      </ng-template>
+    </button>
   </mat-card>
 </section>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
