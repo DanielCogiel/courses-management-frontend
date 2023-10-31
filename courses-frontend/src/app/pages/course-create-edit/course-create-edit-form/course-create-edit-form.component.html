@@ -1,0 +1,87 @@
+<form *ngIf="formGroup" [formGroup]="formGroup">
+
+  <div class="row">
+    <mat-form-field class="col-md-9">
+      <mat-label>Nazwa</mat-label>
+      <input type="text" matInput formControlName="title">
+      <mat-error *ngIf="hasError('title')">{{ getError('title') }}</mat-error>
+    </mat-form-field>
+
+    <div class="col-md-3 file-uploader">
+      <input id="fileInput" type="file" (change)="chooseImage($event)">
+      <label for="fileInput">Wybierz obraz</label>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <mat-form-field class="col">
+      <mat-label>Język</mat-label>
+      <mat-select formControlName="language">
+        <mat-option *ngFor="let language of languages" [value]="language.value">{{ language.label }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="hasError('language')">{{getError('language')}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="col">
+      <mat-label>Poziom</mat-label>
+      <mat-select formControlName="level">
+        <mat-option *ngFor="let level of levels" [value]="level.value">{{ level.label }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="hasError('level')">{{getError('level')}}</mat-error>
+    </mat-form-field>
+
+  </div>
+  <div class="row">
+
+    <mat-form-field class="col">
+      <mat-label>Trener</mat-label>
+      <mat-select formControlName="trainer_id">
+        <mat-option *ngFor="let creator of users" [value]="creator.id">
+          {{ creator.firstName + ' ' + creator.lastName + ' (' + creator.username + ')' }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="hasError('trainer_id')">{{getError('trainer_id')}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="col">
+      <mat-label>Lokalizacja</mat-label>
+      <input matInput type="text" formControlName="location">
+      <mat-error *ngIf="hasError('location')">{{getError('location')}}</mat-error>
+    </mat-form-field>
+
+
+  </div>
+
+</form>
+
+<form [formGroup]="lessonFormGroup">
+  <h2>Podaj terminy zajęć</h2>
+  <div class="row lesson-row">
+    <mat-form-field class="col-md-4">
+      <mat-label>Wybierz datę</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="col-md-3">
+      <input matInput type="time" formControlName="timeStart">
+    </mat-form-field>
+
+    <mat-form-field class="col-md-3">
+      <input matInput type="time" formControlName="timeFinish">
+    </mat-form-field>
+
+    <button color="primary" class="col-md-1 add-date-button" mat-raised-button (click)="pushDate()">Dodaj</button>
+  </div>
+
+</form>
+
+<mat-chip-set>
+  <mat-chip *ngFor="let date of datetimes; let i = index" (removed)="deleteDate(i)" color="accent">
+    {{ date.date + ' ' + date.timeStart + ' - ' + date.timeFinish }}
+    <button matChipRemove><mat-icon>cancel</mat-icon></button>
+  </mat-chip>
+</mat-chip-set>

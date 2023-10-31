@@ -7,6 +7,7 @@ import { UserButtonComponent } from './user-button/user-button.component';
 import { TimerComponent } from './timer/timer.component';
 import { TimePipe } from "../../data-access/timer/time.pipe";
 import { HasRolesDirective } from "../../data-access/role/has-roles.directive";
+import { RouterLink } from "@angular/router";
 @NgModule({
   declarations: [HeaderComponent, UserButtonComponent, TimerComponent],
   exports: [HeaderComponent],
@@ -15,7 +16,8 @@ import { HasRolesDirective } from "../../data-access/role/has-roles.directive";
     MatButtonModule,
     MatIconModule,
     TimePipe,
-    HasRolesDirective
+    HasRolesDirective,
+    RouterLink
   ]
 })
 export class HeaderModule { }

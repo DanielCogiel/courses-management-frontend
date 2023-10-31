@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthenticatedGuard } from "./guards/authenticated.guard";
+import { RoleGuard } from "./guards/role.guard";
+import Role from "./data-access/role/role.enum";
 
 const routes: Routes = [
   {
@@ -8,10 +10,18 @@ const routes: Routes = [
     loadComponent: () => import('./layouts/main-layout/main-layout.component').then(c => c.MainLayoutComponent),
     children: [
       {
-        path: '',
+        path: 'kursy',
         canActivate: [AuthenticatedGuard],
         loadComponent: () => import('./pages/courses-page/courses-page.component').then(c => c.CoursesPageComponent)
       },
+      {
+        path: 'kursy',
+        canActivate: [AuthenticatedGuard, RoleGuard],
+        data: {
+          roles: [Role.CREATOR, Role.ADMIN]
+        },
+        loadChildren: () => import('./pages/course-create-edit/course-create-edit.module').then(m => m.CourseCreateEditModule)
+      }
     ]
   },
   {
