@@ -1,0 +1,19 @@
+<div *ngIf="data" class="course">
+  <div class="image-section">
+    <img [src]="getImageUrl()">
+    <div class="sign-section">
+      <button mat-raised-button>
+        Zapisz się
+        <mat-icon iconPositionEnd>library_add_check</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="content-section">
+    <div class="header">
+      <h2>{{data.title}}</h2>
+      <div class="right-section">
+        <button mat-mini-fab><mat-icon>delete</mat-icon></button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+@import '../../../styles/scss/variables';
+
+.course {
+  height: 250px;
+  border: 2px solid $main-color;
+  background-color: $main-color;
+  border-right-width: 10px;
+  border-bottom-width: 10px;
+  border-radius: 4px;
+  display: flex;
+  width: 100%;
+
+  .image-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img {
+      margin: 15px 15px 15px 13px;
+      width: 170px !important;
+      height: 170px;
+      outline: 2px solid white;
+      border-radius: 4px;
+      object-fit: cover;
+    }
+    .sign-section {
+      margin: 0 15px 0 13px;
+
+      button {
+        width: 170px;
+      }
+    }
+  }
+  .content-section {
+    width: 100%;
+    .header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      h2 {
+        text-align: center;
+        flex: 1;
+        margin: 0;
+        font-weight: bold;
+        color: white;
+      }
+    }
+  }
+}

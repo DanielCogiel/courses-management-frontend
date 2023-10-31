@@ -1,0 +1,10 @@
+section {
+  padding-top: 30px;
+}
+
+.tile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
