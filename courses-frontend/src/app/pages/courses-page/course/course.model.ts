@@ -3,11 +3,14 @@ import { Language } from "../../../data-access/language/language.enum";
 
 interface CourseModel {
   id: string,
-  trainer_id: string,
+  firstName: string,
+  lastName: string
   title: string,
   level: Level,
   language: Language,
   location: string,
-  image_path: string
+  image_path: string,
+  isOwner: boolean,
+  isEnrolled: boolean
 }
 export default CourseModel;

@@ -1,7 +1,16 @@
 <section>
   <div class="container">
-    <div class="tile-grid">
-      <app-course *ngFor="let course of (data$ | async)" [data]="course"></app-course>
+    <div class="tile-grid" *ngIf="!loading else loadingTemplate">
+      <app-course
+        *ngFor="let course of data"
+        [data]="course"
+        (onDelete)="deleteCourse(course.id)"
+        [routerLink]="'/kursy/edytuj/' + course.id"
+        [relativeTo]="null"
+      ></app-course>
     </div>
+    <ng-template #loadingTemplate>
+      <app-loader></app-loader>
+    </ng-template>
   </div>
 </section>

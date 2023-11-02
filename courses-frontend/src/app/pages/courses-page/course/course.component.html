@@ -12,7 +12,27 @@
     <div class="header">
       <h2>{{data.title}}</h2>
       <div class="right-section">
-        <button mat-mini-fab><mat-icon>delete</mat-icon></button>
+        <button mat-mini-fab (click)="viewClicked()"><mat-icon>remove_red_eye</mat-icon></button>
+        <button mat-mini-fab *ngIf="data.isOwner" (click)="editClicked()"><mat-icon>edit</mat-icon></button>
+        <button mat-mini-fab *ngIf="data.isOwner" (click)="deleteClicked()"><mat-icon>delete</mat-icon></button>
+      </div>
+    </div>
+    <div class="details-section">
+      <div class="element">
+        <mat-icon>supervisor_account</mat-icon>
+        <strong>{{data.firstName + ' ' + data.lastName}}</strong>
+      </div>
+      <div class="element">
+        <mat-icon>language</mat-icon>
+        <strong>{{getLanguageLabel(data.language)}}</strong>
+      </div>
+      <div class="element">
+        <mat-icon>bar_chart</mat-icon>
+        <strong>{{getLevelLabel(data.level)}}</strong>
+      </div>
+      <div class="element">
+        <mat-icon>location_pin</mat-icon>
+        <strong>{{data.location}}</strong>
       </div>
     </div>
   </div>
