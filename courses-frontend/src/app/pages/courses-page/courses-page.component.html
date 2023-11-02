@@ -5,8 +5,7 @@
         *ngFor="let course of data"
         [data]="course"
         (onDelete)="deleteCourse(course.id)"
-        [routerLink]="'/kursy/edytuj/' + course.id"
-        [relativeTo]="null"
+        (onEnroll)="course.isEnrolled ? leaveUserFromCourse(course.id) : enrollUserToCourse(course.id)"
       ></app-course>
     </div>
     <ng-template #loadingTemplate>

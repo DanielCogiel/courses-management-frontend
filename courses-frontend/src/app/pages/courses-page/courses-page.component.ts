@@ -13,7 +13,7 @@ import { RouterLink } from "@angular/router";
 @Component({
   selector: 'app-courses-page',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, CourseComponent, LoaderComponent, RouterLink],
+  imports: [CommonModule, MatButtonModule, CourseComponent, LoaderComponent],
   templateUrl: './courses-page.component.html',
   styleUrls: ['./courses-page.component.scss']
 })
@@ -55,6 +55,44 @@ export class CoursesPageComponent implements OnDestroy {
           })
         }
       })
+  }
+  enrollUserToCourse(id: string) {
+    this._coursesService
+      .enrollUserToCourse(id)
+      .pipe(
+        first(),
+        map(response => response.body)
+      ).subscribe({
+      next: (value) => {
+        this._snackbar.open(value?.message ?? 'Udało się zapisać do kursu!', 'Zamknij', {
+          duration: 5 * 1000
+        })
+        this._coursesService.refresh();
+      }, error: error => {
+        this._snackbar.open(error?.error?.message ?? 'Nie udało się zapisać Cię do kursu.', 'Zamknij', {
+          duration: 5 * 1000
+        })
+      }
+    })
+  }
+  leaveUserFromCourse(id: string) {
+    this._coursesService
+      .leaveUserFromCourse(id)
+      .pipe(
+        first(),
+        map(response => response.body)
+      ).subscribe({
+      next: (value) => {
+        this._snackbar.open(value?.message ?? 'Wypisano cię z kursu.', 'Zamknij', {
+          duration: 5 * 1000
+        })
+        this._coursesService.refresh();
+      }, error: error => {
+        this._snackbar.open(error?.error?.message ?? 'Nie udało się wypisać Cię z kursu.', 'Zamknij', {
+          duration: 5 * 1000
+        })
+      }
+    })
   }
   ngOnDestroy() {
     this.destroy$.next();

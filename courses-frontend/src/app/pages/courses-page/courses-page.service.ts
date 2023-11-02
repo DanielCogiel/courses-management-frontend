@@ -15,6 +15,12 @@ export class CoursesPageService {
   deleteCourse(id: string) {
     return this._api.delete<{message: string}>(`/courses/delete/${id}`);
   }
+  enrollUserToCourse(id: string) {
+    return this._api.post<{message: string}>(`/enroll/${id}`);
+  }
+  leaveUserFromCourse(id: string) {
+    return this._api.delete<{message: string}>(`/leave/${id}`);
+  }
   refresh() {
     this.refresh$.next(true);
   }

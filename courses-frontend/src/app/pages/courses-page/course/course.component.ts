@@ -6,11 +6,12 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { getLanguageLabel } from "../../../utility/get-language-label.function";
 import { getLevelLabel } from "../../../utility/get-level-label.function";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-course',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, MatButtonModule, MatIconModule, RouterLink],
   templateUrl: './course.component.html',
   styleUrls: ['./course.component.scss']
 })
@@ -18,6 +19,7 @@ export class CourseComponent {
   @Output() onDelete: EventEmitter<any> = new EventEmitter<any>();
   @Output() onEdit: EventEmitter<any> = new EventEmitter<any>();
   @Output() onView: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onEnroll: EventEmitter<any> = new EventEmitter<any>();
   @Input() data?: CourseModel;
   readonly getLanguageLabel = getLanguageLabel
   readonly getLevelLabel = getLevelLabel;
@@ -33,5 +35,8 @@ export class CourseComponent {
   }
   viewClicked() {
     this.onView.emit();
+  }
+  enrollClicked() {
+    this.onEnroll.emit();
   }
 }

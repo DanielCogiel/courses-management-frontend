@@ -17,10 +17,6 @@ export class HeaderComponent {
     private _userDataService: UserDataService
   ) {}
   logout() {
-    this._auth.destroyAccessToken();
-    this._auth.clearRefreshToken();
-    this._roleService.setRole(null);
-    this._userDataService.setUser(null);
-    this._router.navigate(['login']);
+    this._auth.logout();
   }
 }
