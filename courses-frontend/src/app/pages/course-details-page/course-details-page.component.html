@@ -1,9 +1,12 @@
 <section>
   <div class="container">
-    <app-course-details [id]="id"></app-course-details>
+    <app-course-details [id]="id" (loading)="detailsLoading = $event"></app-course-details>
     <div class="bottom-section">
-      <app-course-attendants [id]="id"></app-course-attendants>
-      <app-course-lessons [id]="id"></app-course-lessons>
+      <app-course-attendants [id]="id" (loading)="attendantsLoading = $event"></app-course-attendants>
+      <app-course-lessons [id]="id" (loading)="lessonsLoading = $event"></app-course-lessons>
     </div>
+    <ng-container *ngIf="attendantsLoading || detailsLoading || lessonsLoading">>
+      <app-loader></app-loader>
+    </ng-container>
   </div>
 </section>

@@ -1,8 +1,9 @@
 .bottom-section {
   display: flex;
+  gap: 40px;
 
   app-course-attendants {
-    width: 300px;
+    width: 275px;
   }
   app-course-lessons {
     flex: 1;

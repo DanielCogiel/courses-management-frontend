@@ -1,1 +1,9 @@
-<pre>{{attendants$ | async | json}}</pre>
+<div class="panel" *ngIf="attendants$ | async as data">
+  <h2>Uczestnicy</h2>
+  <div class="users">
+    <div class="item" *ngFor="let user of data">
+      <mat-icon>account_circle</mat-icon>
+      <span>{{ user.firstName + ' ' + user.lastName + ' (' + user.username + ')' }}</span>
+    </div>
+  </div>
+</div>

@@ -5,13 +5,15 @@
   <div class="content-container">
     <h2>{{ details.title }}</h2>
     <div class="content">
-      <div class="description">Lorem ipsu iasf iauhf iaushf iuashf iuashf iuashf iuashifu hasduifh asiudfh
+      <div class="description">
+        <h2>Opis</h2>
+        Lorem ipsu iasf iauhf iaushf iuashf iuashf iuashf iuashifu hasduifh asiudfh
       </div>
       <div class="specifics">
         <div class="item"><strong>Właściciel: </strong>{{details.ownerFirstName + ' ' + details.ownerLastName}}</div>
         <div class="item"><strong>Trener: </strong>{{details.trainerFirstName + ' ' + details.trainerLastName}}</div>
-        <div class="item"><strong>Poziom: </strong>{{details.level}}</div>
-        <div class="item"><strong>Język: </strong>{{details.language}}</div>
+        <div class="item"><strong>Poziom: </strong>{{getLevelLabel(details.level)}}</div>
+        <div class="item"><strong>Język: </strong>{{getLanguageLabel(details.language)}}</div>
         <div class="item"><strong>Lokalizacja: </strong>{{details.location}}</div>
       </div>
     </div>
