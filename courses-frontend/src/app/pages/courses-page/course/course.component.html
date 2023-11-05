@@ -1,0 +1,45 @@
+<div *ngIf="data" class="course">
+  <div class="image-section">
+    <img [src]="getImageUrl()">
+    <div class="sign-section">
+      <button mat-raised-button (click)="enrollClicked()">
+        {{ data.isEnrolled ? 'Wypisz się' : 'Zapisz się'}}
+        <mat-icon iconPositionEnd>{{ data.isEnrolled ? 'logout' : 'library_add_check'}}</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="content-section">
+    <div class="header">
+      <h2>{{data.title}}</h2>
+      <div class="right-section">
+        <button mat-mini-fab (click)="viewClicked()"><mat-icon>remove_red_eye</mat-icon></button>
+        <button
+          mat-mini-fab
+          *ngIf="data.isOwner"
+          (click)="editClicked()"
+          [routerLink]="'/kursy/edytuj/' + data.id"
+          [relativeTo]="null"
+        ><mat-icon>edit</mat-icon></button>
+        <button mat-mini-fab *ngIf="data.isOwner" (click)="deleteClicked()"><mat-icon>delete</mat-icon></button>
+      </div>
+    </div>
+    <div class="details-section">
+      <div class="element">
+        <mat-icon>supervisor_account</mat-icon>
+        <strong>{{data.firstName + ' ' + data.lastName}}</strong>
+      </div>
+      <div class="element">
+        <mat-icon>language</mat-icon>
+        <strong>{{getLanguageLabel(data.language)}}</strong>
+      </div>
+      <div class="element">
+        <mat-icon>bar_chart</mat-icon>
+        <strong>{{getLevelLabel(data.level)}}</strong>
+      </div>
+      <div class="element">
+        <mat-icon>location_pin</mat-icon>
+        <strong>{{data.location}}</strong>
+      </div>
+    </div>
+  </div>
+</div>

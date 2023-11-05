@@ -36,7 +36,7 @@ export class TokenInterceptor implements HttpInterceptor {
           && error.status === 401
           && error.url?.slice(error.url?.lastIndexOf('/')) !== '/login'
         )
-          console.log('LOGOUT');
+          this._auth.logout();
         return throwError(error);
       }))
   }
