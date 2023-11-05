@@ -16,11 +16,13 @@ import { UserCreateModel } from "../models/user-create-edit.model";
 export class CourseCreateEditFormComponent extends ErrorHandlerForm {
   @Input() formGroup?: FormGroup;
   lessonFormGroup = this._fb.group({
+    title: ['', [Validators.required, Validators.maxLength(255)]],
+    description: ['', [Validators.maxLength(1000)]],
     date: [''],
     timeStart: [''],
     timeFinish: ['']
   })
-  @Input() datetimes: {date: string, timeStart: string, timeFinish: string} [] = [];
+  @Input() datetimes: {title: string | null, description: string | null, date: string, timeStart: string, timeFinish: string} [] = [];
   @Input() users: UserCreateModel [] | null = null;
   readonly levels = levels;
   readonly languages = languages;
@@ -37,6 +39,7 @@ export class CourseCreateEditFormComponent extends ErrorHandlerForm {
     if (dateObj) {
       this.datetimes.push(dateObj);
       this.lessonFormGroup.reset();
+      this.lessonFormGroup.markAsUntouched();
     }
   }
   private _formatDate(date: Date) {
@@ -49,6 +52,7 @@ export class CourseCreateEditFormComponent extends ErrorHandlerForm {
     if (date && timeStart && timeFinish) {
       const formattedDate = this._formatDate(new Date(date));
       return {
+        ...this.lessonFormGroup.getRawValue(),
         date: formattedDate,
         timeStart: timeStart,
         timeFinish: timeFinish

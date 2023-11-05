@@ -1,0 +1,19 @@
+<div class="details" *ngIf="details$ | async as details">
+  <div class="image-wrapper">
+    <img [src]="getImageUrl(details.image_path)">
+  </div>
+  <div class="content-container">
+    <h2>{{ details.title }}</h2>
+    <div class="content">
+      <div class="description">Lorem ipsu iasf iauhf iaushf iuashf iuashf iuashf iuashifu hasduifh asiudfh
+      </div>
+      <div class="specifics">
+        <div class="item"><strong>Właściciel: </strong>{{details.ownerFirstName + ' ' + details.ownerLastName}}</div>
+        <div class="item"><strong>Trener: </strong>{{details.trainerFirstName + ' ' + details.trainerLastName}}</div>
+        <div class="item"><strong>Poziom: </strong>{{details.level}}</div>
+        <div class="item"><strong>Język: </strong>{{details.language}}</div>
+        <div class="item"><strong>Lokalizacja: </strong>{{details.location}}</div>
+      </div>
+    </div>
+  </div>
+</div>

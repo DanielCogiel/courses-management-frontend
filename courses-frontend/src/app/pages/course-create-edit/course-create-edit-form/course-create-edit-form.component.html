@@ -59,7 +59,7 @@
   <h2>Podaj terminy zajęć</h2>
   <div class="row lesson-row">
     <mat-form-field class="col-md-4">
-      <mat-label>Wybierz datę</mat-label>
+      <mat-label>Wybierz datę lekcji</mat-label>
       <input matInput [matDatepicker]="picker" formControlName="date">
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
@@ -67,14 +67,30 @@
     </mat-form-field>
 
     <mat-form-field class="col-md-3">
+      <mat-label>Godzina rozpoczęcia</mat-label>
       <input matInput type="time" formControlName="timeStart">
     </mat-form-field>
 
     <mat-form-field class="col-md-3">
+      <mat-label>Godzina zakończenia</mat-label>
       <input matInput type="time" formControlName="timeFinish">
     </mat-form-field>
 
     <button color="primary" class="col-md-1 add-date-button" mat-raised-button (click)="pushDate()">Dodaj</button>
+  </div>
+
+  <div class="row">
+    <mat-form-field class="col">
+      <mat-label>Nazwa lekcji</mat-label>
+      <input matInput type="text" formControlName="title">
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <mat-form-field class="col">
+      <mat-label>Opis lekcji (opcjonalny)</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
   </div>
 
 </form>

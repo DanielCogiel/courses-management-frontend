@@ -12,7 +12,12 @@
     <div class="header">
       <h2>{{data.title}}</h2>
       <div class="right-section">
-        <button mat-mini-fab (click)="viewClicked()"><mat-icon>remove_red_eye</mat-icon></button>
+        <button
+          mat-mini-fab
+          (click)="viewClicked()"
+          [routerLink]="'/kursy/' + data.id"
+          [relativeTo]="null"
+        ><mat-icon>remove_red_eye</mat-icon></button>
         <button
           mat-mini-fab
           *ngIf="data.isOwner"

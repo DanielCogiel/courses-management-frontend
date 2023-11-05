@@ -21,6 +21,11 @@ const routes: Routes = [
           roles: [Role.CREATOR, Role.ADMIN]
         },
         loadChildren: () => import('./pages/course-create-edit/course-create-edit.module').then(m => m.CourseCreateEditModule)
+      },
+      {
+        path: 'kursy/:id',
+        canActivate: [AuthenticatedGuard],
+        loadComponent: () => import ('./pages/course-details-page/course-details-page.component').then(c => c.CourseDetailsPageComponent)
       }
     ]
   },
