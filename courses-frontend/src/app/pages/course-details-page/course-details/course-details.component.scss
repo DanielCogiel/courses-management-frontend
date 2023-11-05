@@ -1,0 +1,75 @@
+@import '../../../styles/scss/variables';
+
+.details {
+  width: 100%;
+  margin-top: 30px;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  margin-bottom: 30px;
+
+  .image-wrapper {
+    width: 275px;
+    height: 275px;
+    padding: 10px;
+    border: 3px solid #4c3175;
+    border-radius: 4px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+  }
+  .content-container {
+    flex: 1;
+    border: 3px solid #4c3175;
+    border-radius: 4px;
+    background-color: white;
+    & > h2 {
+      width: 80%;
+      background-color: $main-color;
+      border: 3px solid $accent-color;
+      border-top: none;
+      border-left: none;
+      color: white;
+      border-bottom-right-radius: 4px;
+      text-align: center;
+      padding-bottom: 2px;
+    }
+    .content {
+      margin: 10px;
+      display: flex;
+      gap: 10px;
+      .description {
+        width: 70%;
+        border-radius: 4px;
+        border: 3px solid #4c3175;
+        color: white;
+        background-color: $main-color-lighter;
+        padding: 10px;
+      }
+      .specifics {
+        flex: 1;
+        .item {
+          padding: 5px;
+          border-radius: 4px;
+          background-color: $main-color;
+          color: white;
+          border: 3px solid #4c3175;
+          margin: 4px;
+          margin-bottom: 10px;
+          &:nth-child(odd) {
+            background-color: $main-color-lighter;
+          }
+          &:first-child {
+            margin-top: 0;
+          }
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}

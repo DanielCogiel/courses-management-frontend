@@ -1,0 +1,17 @@
+<div class="panel" *ngIf="lessons$ | async as data">
+    <h2>Lekcje</h2>
+    <div class="list">
+      <mat-expansion-panel *ngFor="let lesson of data">
+        <mat-expansion-panel-header>
+          <p>
+            <strong>{{ lesson.title }}</strong>
+            <span>{{ ' (' + getFormattedDate(lesson.date) + ' ' + lesson.timeStart + ' - ' + lesson.timeFinish + ')' }}</span>
+          </p>
+        </mat-expansion-panel-header>
+        <mat-panel-description>
+          {{ lesson.description }}
+        </mat-panel-description>
+      </mat-expansion-panel>
+    </div>
+</div>
+

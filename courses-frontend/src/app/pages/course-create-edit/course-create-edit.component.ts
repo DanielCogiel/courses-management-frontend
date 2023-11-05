@@ -25,7 +25,7 @@ export class CourseCreateEditComponent {
     trainer_id: ['', Validators.required],
     image: [null]
   });
-  datetimes: {date: string, timeStart: string, timeFinish: string} [] = [];
+  datetimes: {title: string | null, description: string | null, date: string, timeStart: string, timeFinish: string} [] = [];
   users$: Observable<UserCreateModel [] | null> = this._courseService.getCreators()
     .pipe(
       first(),
@@ -54,6 +54,7 @@ export class CourseCreateEditComponent {
             const timeStart = datetime.timeStart;
             const timeFinish = datetime.timeFinish;
             return {
+              ...datetime,
               date: this._formatDate(new Date(datetime.date)),
               timeStart: timeStart.slice(0, timeStart.lastIndexOf(':')),
               timeFinish: timeFinish.slice(0, timeFinish.lastIndexOf(':'))

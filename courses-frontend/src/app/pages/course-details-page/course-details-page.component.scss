@@ -1,0 +1,11 @@
+.bottom-section {
+  display: flex;
+  gap: 40px;
+
+  app-course-attendants {
+    width: 275px;
+  }
+  app-course-lessons {
+    flex: 1;
+  }
+}

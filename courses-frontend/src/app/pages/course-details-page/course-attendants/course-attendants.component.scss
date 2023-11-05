@@ -1,0 +1,38 @@
+@import '../../../styles/scss/variables';
+
+.panel {
+  border: 3px solid #4c3175;
+  border-radius: 4px;
+  h2 {
+    text-align: center;
+    background-color: $main-color;
+    color: white;
+    border-bottom: 3px solid #4c3175;
+    padding: 5px;
+    margin: 0;
+  }
+  .users {
+    .item {
+      text-align: center;
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      border: 3px solid #4c3175;
+      background-color: $main-color;
+      color: white;
+      border-radius: 10px;
+      margin: 6px;
+      &:nth-child(odd) {
+        background-color: $main-color-lighter;
+      }
+
+      mat-icon {
+        color: white;
+      }
+
+      span {
+        flex: 1;
+      }
+    }
+  }
+}
