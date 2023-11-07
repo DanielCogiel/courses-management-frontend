@@ -5,7 +5,7 @@
   </div>
   <div class="right-section">
     <button [routerLink]="'kursy'" mat-raised-button>Wszystkie kursy</button>
-    <button mat-raised-button>Moje kursy</button>
+    <button [routerLink]="'kursy/moje'" mat-raised-button>Moje kursy</button>
     <a
       *hasRoles="['ADMIN', 'CREATOR']"
       mat-raised-button

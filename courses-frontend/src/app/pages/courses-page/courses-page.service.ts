@@ -12,6 +12,9 @@ export class CoursesPageService {
   getCourses() {
     return this._api.get<CourseModel[]>('/courses/all');
   }
+  getPersonalCourses() {
+    return this._api.get<CourseModel[]>('/courses/personal');
+  }
   deleteCourse(id: string) {
     return this._api.delete<{message: string}>(`/courses/delete/${id}`);
   }
