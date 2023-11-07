@@ -1,4 +1,5 @@
 <section>
+  <h1>{{ isPersonalPage ? 'Moje kursy' : 'Lista kursów' }}</h1>
   <div class="container">
     <div class="tile-grid" *ngIf="!loading else loadingTemplate">
       <app-course

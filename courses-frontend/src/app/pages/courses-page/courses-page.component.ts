@@ -8,7 +8,7 @@ import { CoursesPageService } from "./courses-page.service";
 import { CourseComponent } from "./course/course.component";
 import { LoaderComponent } from "../../components/loader/loader.component";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-courses-page',
@@ -21,10 +21,12 @@ export class CoursesPageComponent implements OnDestroy {
   loading: boolean = true;
   refresh$ = this._coursesService.refresh$;
   destroy$: Subject<void> = new Subject<void>();
+  isPersonalPage = this._router.url === '/kursy/moje';
   data$: Observable<CourseModel [] | null> = this.refresh$
     .pipe(
       tap(() => this.loading = true),
-      switchMap(() => this._coursesService.getCourses()),
+      switchMap(() =>
+        this.isPersonalPage ? this._coursesService.getPersonalCourses() : this._coursesService.getCourses()),
       map(response => response.body),
       tap(() => this.loading = false),
       takeUntil(this.destroy$)
@@ -32,7 +34,8 @@ export class CoursesPageComponent implements OnDestroy {
   data: CourseModel [] | null = null;
   constructor(
     private _coursesService: CoursesPageService,
-    private _snackbar: MatSnackBar
+    private _snackbar: MatSnackBar,
+    private _router: Router
   ) {
     this.data$.subscribe(data => this.data = data);
   }

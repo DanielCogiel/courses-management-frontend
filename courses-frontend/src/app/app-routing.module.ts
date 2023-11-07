@@ -15,6 +15,11 @@ const routes: Routes = [
         loadComponent: () => import('./pages/courses-page/courses-page.component').then(c => c.CoursesPageComponent)
       },
       {
+        path: 'kursy/moje',
+        canActivate: [AuthenticatedGuard],
+        loadComponent: () => import('./pages/courses-page/courses-page.component').then(c => c.CoursesPageComponent)
+      },
+      {
         path: 'kursy',
         canActivate: [AuthenticatedGuard, RoleGuard],
         data: {
