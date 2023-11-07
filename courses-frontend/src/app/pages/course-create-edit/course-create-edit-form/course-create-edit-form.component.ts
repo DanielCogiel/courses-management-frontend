@@ -7,6 +7,12 @@ import { roles } from "../../../data-access/role/role.enum";
 import { levels } from "../../../data-access/level/level.enum";
 import { languages } from "../../../data-access/language/language.enum";
 import { UserCreateModel } from "../models/user-create-edit.model";
+import { MatDialog } from "@angular/material/dialog";
+import { AddLessonModalComponent } from "../add-lesson-modal/add-lesson-modal.component";
+import { first } from "rxjs";
+import { CourseLessonModel } from "../../course-details-page/course-lessons/course-lesson.model";
+import { dateFormatter } from "../../../utility/date-formatter.function";
+import { sortLessons } from "../../../utility/sort-lessons.function";
 
 @Component({
   selector: 'app-course-create-edit-form',
@@ -15,44 +21,40 @@ import { UserCreateModel } from "../models/user-create-edit.model";
 })
 export class CourseCreateEditFormComponent extends ErrorHandlerForm {
   @Input() formGroup?: FormGroup;
-  lessonFormGroup = this._fb.group({
-    title: ['', [Validators.required, Validators.maxLength(255)]],
-    description: ['', [Validators.maxLength(1000)]],
-    date: [''],
-    timeStart: [''],
-    timeFinish: ['']
-  })
   @Input() datetimes: {title: string | null, description: string | null, date: string, timeStart: string, timeFinish: string} [] = [];
   @Input() users: UserCreateModel [] | null = null;
   readonly levels = levels;
   readonly languages = languages;
   constructor(
     private _fb: FormBuilder,
-    private _dateAdapter: DateAdapter<any>
+    private _dateAdapter: DateAdapter<any>,
+    private _modalService: MatDialog
   ) {
     super();
   }
-  pushDate() {
-    if (!this.lessonFormGroup?.valid)
-      return;
-    const dateObj = this._composeDateObject();
-    if (dateObj) {
-      this.datetimes.push(dateObj);
-      this.lessonFormGroup.reset();
-      this.lessonFormGroup.markAsUntouched();
-    }
+  openLessonDialog() {
+    this._modalService
+      .open(AddLessonModalComponent)
+      .afterClosed()
+      .pipe(first())
+      .subscribe((result: CourseLessonModel) => {
+        if (result) {
+          const lessonObj = this._composeLesson(result);
+          if (lessonObj) {
+            this.datetimes.push(lessonObj);
+            this.datetimes = sortLessons(this.datetimes);
+          }
+        }
+      });
   }
-  private _formatDate(date: Date) {
-    return `${date.getFullYear()}-${date.getMonth().toString().padStart(2, '0')}-${date.getDay().toString().padStart(2, '0')}`
-  }
-  private _composeDateObject() {
-    const date = this.lessonFormGroup?.getRawValue()?.date;
-    const timeStart = this.lessonFormGroup?.getRawValue().timeStart;
-    const timeFinish = this.lessonFormGroup?.getRawValue().timeFinish;
+  private _composeLesson(lesson: CourseLessonModel) {
+    const date = lesson.date;
+    const timeStart = lesson.timeStart;
+    const timeFinish = lesson.timeFinish;
     if (date && timeStart && timeFinish) {
-      const formattedDate = this._formatDate(new Date(date));
+      const formattedDate = dateFormatter(new Date(date));
       return {
-        ...this.lessonFormGroup.getRawValue(),
+        ...lesson,
         date: formattedDate,
         timeStart: timeStart,
         timeFinish: timeFinish

@@ -14,11 +14,14 @@ import { MatChipsModule } from "@angular/material/chips";
 import { MatOptionModule } from "@angular/material/core";
 import { MatSelectModule } from "@angular/material/select";
 import { LoaderComponent } from "../../components/loader/loader.component";
+import { AddLessonModalComponent } from './add-lesson-modal/add-lesson-modal.component';
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
     CourseCreateEditComponent,
-    CourseCreateEditFormComponent
+    CourseCreateEditFormComponent,
+    AddLessonModalComponent
   ],
   imports: [
     CommonModule,
@@ -44,6 +47,7 @@ import { LoaderComponent } from "../../components/loader/loader.component";
     MatOptionModule,
     MatSelectModule,
     LoaderComponent,
+    MatDialogModule,
   ]
 })
 export class CourseCreateEditModule { }
