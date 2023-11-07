@@ -11,6 +11,11 @@
       mat-raised-button
       [routerLink]="'kursy/utworz'"
     >Stwórz nowy kurs</a>
+    <button
+      *hasRoles="['ADMIN']"
+      [routerLink]="'panel'"
+      mat-raised-button
+    >Panel administracyjny</button>
     <app-timer></app-timer>
     <app-user-button></app-user-button>
     <button mat-icon-button (click)="logout()">
