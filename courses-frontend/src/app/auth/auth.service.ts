@@ -37,7 +37,6 @@ export class AuthService {
     this.destroyAccessToken();
     this.clearRefreshToken();
     this._roleService.setRole(null);
-    this._userDataService.setUser(null);
     this._router.navigate(['login']);
   }
 }

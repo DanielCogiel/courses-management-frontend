@@ -15,14 +15,24 @@ section {
   }
 }
 
-.delete-button {
-  width: 35px;
-  height: 35px;
+.actions {
+  display: flex;
+  gap: 5px;
+
+  a, button {
+    width: 35px;
+    height: 35px;
+  }
 }
 
 .mat-column-actions {
   text-align: center;
   width: 100px;
+}
+
+tr:has(td.me) {
+  border: 3px solid white;
+  font-weight: bold;
 }
 
 tr {

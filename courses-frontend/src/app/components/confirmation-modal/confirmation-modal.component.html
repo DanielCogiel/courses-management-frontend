@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<div mat-dialog-content>
+  <p>{{ data.message }}</p>
+</div>
+<div class="flex justify-content-between m-3" mat-dialog-actions>
+  <button (click)="cancel()" mat-raised-button color="warn">
+    Anuluj
+    <mat-icon>cancel</mat-icon>
+  </button>
+  <button (click)="confirm()" mat-raised-button color="primary">
+    Potwierdź
+    <mat-icon>arrow_forward</mat-icon>
+  </button>
+</div>

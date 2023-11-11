@@ -9,16 +9,21 @@ import { MatButtonModule } from "@angular/material/button";
 import { LoaderComponent } from "../../components/loader/loader.component";
 import { AdminPageService } from "./admin-page.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatDialog } from "@angular/material/dialog";
+import { ConfirmationModalComponent } from "../../components/confirmation-modal/confirmation-modal.component";
+import { UserDataService } from "../../data-access/user/user-data.service";
+import { RoleBadgeComponent } from "../../components/role-badge/role-badge.component";
 
 @Component({
   selector: 'app-admin-page',
   templateUrl: './admin-page.component.html',
   styleUrls: ['./admin-page.component.scss'],
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatIconModule, MatButtonModule, LoaderComponent]
+  imports: [CommonModule, MatTableModule, MatIconModule, MatButtonModule, LoaderComponent, RoleBadgeComponent]
 })
 export class AdminPageComponent implements OnDestroy {
-  columns = ['firstName', 'lastName', 'username', 'email', 'actions'];
+  user$ = this._userDataService.user$
+  columns = ['firstName', 'lastName', 'username', 'email', 'role', 'actions'];
   reset$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   destroy$: Subject<void> = new Subject<void>();
   loading: boolean = false;
@@ -30,7 +35,12 @@ export class AdminPageComponent implements OnDestroy {
       map(response => response.body),
     )
   users: User[] | null = null;
-  constructor(private _adminService: AdminPageService, private _snackbar: MatSnackBar) {
+  constructor(
+    private _adminService: AdminPageService,
+    private _snackbar: MatSnackBar,
+    private _dialog: MatDialog,
+    private _userDataService: UserDataService
+  ) {
     this.users$.subscribe(data => {
       this.users = data;
       this.loading = false;
@@ -42,6 +52,21 @@ export class AdminPageComponent implements OnDestroy {
   }
   _refresh() {
     this.reset$.next(true);
+  }
+  openConfirmationDialog(id: string) {
+    const confirmationDialog = this._dialog.open(ConfirmationModalComponent, {
+      data: {
+        title: 'Usuwanie użytkownika',
+        message: 'Czy na pewno chcesz usunąć tego użytkownika?'
+      }
+    })
+    confirmationDialog
+      .afterClosed()
+      .pipe(first())
+      .subscribe(result => {
+        if (result)
+          this.deleteUser(id)
+      })
   }
   deleteUser(id: string) {
     this._adminService.deleteUser(id)

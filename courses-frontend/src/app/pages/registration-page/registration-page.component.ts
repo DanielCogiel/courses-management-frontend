@@ -42,13 +42,13 @@ export class RegistrationPageComponent {
         .pipe(first())
         .subscribe({
           next: value => {
-            this._snackbar.open(value.body?.message || 'Udało się zarejestrować.', 'Zamknij', {
+            this._snackbar.open(value.body?.message ?? 'Udało się zarejestrować.', 'Zamknij', {
               duration: 5 * 1000
             });
             this._router.navigate(['login']);
           },
           error: error => {
-            this._snackbar.open(error.message, 'Zamknij', {
+            this._snackbar.open(error?.message ?? 'Rejestracja się nie powiodła.', 'Zamknij', {
               duration: 5 * 1000
             });
           }
