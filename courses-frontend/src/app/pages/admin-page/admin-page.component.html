@@ -38,6 +38,9 @@
         <th mat-header-cell *matHeaderCellDef>Akcje</th>
         <td [class.me]="(user$ | async)?.username === user.username" mat-cell *matCellDef="let user">
           <div *ngIf="(user$ | async)?.username !== user.username" class="actions">
+            <button (click)="openPasswordModal(user.username)" mat-mini-fab>
+              <mat-icon>change_circle</mat-icon>
+            </button>
             <a mat-mini-fab [href]="'mailto:' + user.email">
               <mat-icon>mail</mat-icon>
             </a>

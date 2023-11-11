@@ -13,6 +13,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { ConfirmationModalComponent } from "../../components/confirmation-modal/confirmation-modal.component";
 import { UserDataService } from "../../data-access/user/user-data.service";
 import { RoleBadgeComponent } from "../../components/role-badge/role-badge.component";
+import { PasswordChangeModalComponent } from "./password-change-modal/password-change-modal.component";
 
 @Component({
   selector: 'app-admin-page',
@@ -52,6 +53,30 @@ export class AdminPageComponent implements OnDestroy {
   }
   _refresh() {
     this.reset$.next(true);
+  }
+  openPasswordModal(username: string) {
+    const changePasswordDialog = this._dialog.open(PasswordChangeModalComponent);
+    changePasswordDialog
+      .afterClosed()
+      .pipe(first())
+      .subscribe((result?: {password: string, confirmPassword: string}) => {
+        if (result)
+          this.changePassword(username, result);
+      })
+  }
+  changePassword(username: string, passwords: {password: string, confirmPassword: string}) {
+    this._adminService
+      .changePassword(username, passwords)
+      .pipe(
+        first(),
+        map(response => response.body)
+      ).subscribe({
+      next: result => this._snackbar.open(result?.message ?? 'Pomyślnie zmieniono hasło.', 'Zamknij', {
+        duration: 5 * 1000
+      }), error: error => this._snackbar.open(error?.message ?? 'Nie udało się zmienić hasła.', 'Zamknij', {
+        duration: 5 * 1000
+      })
+    })
   }
   openConfirmationDialog(id: string) {
     const confirmationDialog = this._dialog.open(ConfirmationModalComponent, {

@@ -13,4 +13,7 @@ export class AdminPageService {
   deleteUser(id: string) {
     return this._api.delete<{message: string}>(`/users/delete/${id}`);
   }
+  changePassword(username: string, passwords: {password: string, confirmPassword: string}) {
+    return this._api.put<{message: string}>(`/changePassword/${username}`, passwords);
+  }
 }

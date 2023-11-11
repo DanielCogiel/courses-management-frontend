@@ -48,7 +48,7 @@ export class RegistrationPageComponent {
             this._router.navigate(['login']);
           },
           error: error => {
-            this._snackbar.open(error?.message ?? 'Rejestracja się nie powiodła.', 'Zamknij', {
+            this._snackbar.open(error.error?.message ?? 'Rejestracja się nie powiodła.', 'Zamknij', {
               duration: 5 * 1000
             });
           }
