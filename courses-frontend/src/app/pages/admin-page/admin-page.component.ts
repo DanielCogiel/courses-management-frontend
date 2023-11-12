@@ -14,13 +14,16 @@ import { ConfirmationModalComponent } from "../../components/confirmation-modal/
 import { UserDataService } from "../../data-access/user/user-data.service";
 import { RoleBadgeComponent } from "../../components/role-badge/role-badge.component";
 import { PasswordChangeModalComponent } from "./password-change-modal/password-change-modal.component";
+import { PermissionChangeModalComponent } from "./permission-change-modal/permission-change-modal.component";
+import Role from "../../data-access/role/role.enum";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @Component({
   selector: 'app-admin-page',
   templateUrl: './admin-page.component.html',
   styleUrls: ['./admin-page.component.scss'],
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatIconModule, MatButtonModule, LoaderComponent, RoleBadgeComponent]
+  imports: [CommonModule, MatTableModule, MatIconModule, MatButtonModule, LoaderComponent, RoleBadgeComponent, MatTooltipModule]
 })
 export class AdminPageComponent implements OnDestroy {
   user$ = this._userDataService.user$
@@ -108,6 +111,32 @@ export class AdminPageComponent implements OnDestroy {
         }, error: (error) => this._snackbar.open(error?.error?.message ?? 'Nie udało się usunąć użytkownika.', 'Zamknij', {
           duration: 5 * 1000
         })
+      })
+  }
+  openRoleSwapModal(username: string, role: Role) {
+    const roleSwapDialog = this._dialog.open(PermissionChangeModalComponent, {
+      data: { currentRole: role }
+    });
+    roleSwapDialog
+      .afterClosed()
+      .pipe(first())
+      .subscribe(result => {
+        if (result)
+          this._adminService
+            .changeRole(username, result)
+            .pipe(
+              first(),
+              map(response => response.body)
+            ).subscribe({
+            next: result => {
+              this._snackbar.open(result?.message ?? 'Pomyślnie zmieniono rolę użytkownika.', 'Zamknij', {
+                duration: 5 * 1000
+              })
+              this._refresh();
+            }, error: error => this._snackbar.open(error.error?.message ?? 'Nie udało się zmienić roli użytkownika.', 'Zamknij', {
+              duration: 5 * 1000
+            })
+          })
       })
   }
 }

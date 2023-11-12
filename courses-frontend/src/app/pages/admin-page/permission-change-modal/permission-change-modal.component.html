@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Zmień uprawnienia użytkownika</h1>
+
+<mat-form-field mat-dialog-content class="w-100">
+  <mat-label>Nowa rola użytkownika</mat-label>
+  <mat-select [(ngModel)]="role">
+    <mat-option *ngFor="let role of roles" [value]="role.role">{{ role.name }}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div class="flex justify-content-between m-3 actions" mat-dialog-actions>
+  <button (click)="cancel()" mat-raised-button color="warn">
+    Anuluj
+    <mat-icon>cancel</mat-icon>
+  </button>
+  <button (click)="changeRole()" mat-raised-button color="primary">
+    Zatwierdź
+    <mat-icon>published_with_changes</mat-icon>
+  </button>
+</div>
