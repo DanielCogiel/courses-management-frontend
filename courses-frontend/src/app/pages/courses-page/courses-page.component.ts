@@ -9,6 +9,8 @@ import { CourseComponent } from "./course/course.component";
 import { LoaderComponent } from "../../components/loader/loader.component";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router, RouterLink } from "@angular/router";
+import { MatDialog } from "@angular/material/dialog";
+import { ConfirmationModalComponent } from "../../components/confirmation-modal/confirmation-modal.component";
 
 @Component({
   selector: 'app-courses-page',
@@ -35,9 +37,25 @@ export class CoursesPageComponent implements OnDestroy {
   constructor(
     private _coursesService: CoursesPageService,
     private _snackbar: MatSnackBar,
+    private _dialog: MatDialog,
     private _router: Router
   ) {
     this.data$.subscribe(data => this.data = data);
+  }
+  openConfirmationModal(id: string) {
+    const confirmationDialog = this._dialog.open(ConfirmationModalComponent, {
+      data: {
+        title: 'Usuwanie kursu',
+        message: 'Czy na pewno chcesz usunąć ten kurs?'
+      }
+    })
+    confirmationDialog
+      .afterClosed()
+      .pipe(first())
+      .subscribe(result => {
+        if (result)
+          this.deleteCourse(id);
+      })
   }
   deleteCourse(id: string) {
     this._coursesService

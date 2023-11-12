@@ -5,7 +5,7 @@
       <app-course
         *ngFor="let course of data"
         [data]="course"
-        (onDelete)="deleteCourse(course.id)"
+        (onDelete)="openConfirmationModal(course.id)"
         (onEnroll)="course.isEnrolled ? leaveUserFromCourse(course.id) : enrollUserToCourse(course.id)"
       ></app-course>
     </div>

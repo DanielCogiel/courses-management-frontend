@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import User from "./user.model";
 import { ApiService } from "../../api/api.service";
 
@@ -7,9 +7,9 @@ import { ApiService } from "../../api/api.service";
   providedIn: 'root'
 })
 export class UserDataService {
-  user$: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
+  user$: BehaviorSubject<User | undefined> = new BehaviorSubject<User | undefined>(undefined);
   constructor(private _api: ApiService) {}
-  setUser(user: User | null) {
+  setUser(user: User | undefined) {
     this.user$.next(user);
   }
   getUser() {

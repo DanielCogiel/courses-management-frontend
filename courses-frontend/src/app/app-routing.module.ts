@@ -31,6 +31,14 @@ const routes: Routes = [
         path: 'kursy/:id',
         canActivate: [AuthenticatedGuard],
         loadComponent: () => import ('./pages/course-details-page/course-details-page.component').then(c => c.CourseDetailsPageComponent)
+      },
+      {
+        path: 'panel',
+        canActivate: [AuthenticatedGuard, RoleGuard],
+        data: {
+          roles: [Role.ADMIN]
+        },
+        loadComponent: () => import ('./pages/admin-page/admin-page.component').then(c => c.AdminPageComponent)
       }
     ]
   },

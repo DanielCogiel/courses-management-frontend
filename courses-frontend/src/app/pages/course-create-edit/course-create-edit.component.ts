@@ -7,6 +7,7 @@ import { Level } from "../../data-access/level/level.enum";
 import { Language } from "../../data-access/language/language.enum";
 import { UserCreateModel } from "./models/user-create-edit.model";
 import { ActivatedRoute, Router } from "@angular/router";
+import { dateFormatter } from "../../utility/date-formatter.function";
 
 @Component({
   selector: 'app-course-create-edit',
@@ -55,7 +56,7 @@ export class CourseCreateEditComponent {
             const timeFinish = datetime.timeFinish;
             return {
               ...datetime,
-              date: this._formatDate(new Date(datetime.date)),
+              date: dateFormatter(new Date(datetime.date)),
               timeStart: timeStart.slice(0, timeStart.lastIndexOf(':')),
               timeFinish: timeFinish.slice(0, timeFinish.lastIndexOf(':'))
             }
@@ -63,9 +64,6 @@ export class CourseCreateEditComponent {
         });
     } else
       this.loading = false;
-  }
-  private _formatDate(date: Date) {
-    return `${date.getFullYear()}-${date.getMonth().toString().padStart(2, '0')}-${date.getDay().toString().padStart(2, '0')}`
   }
   submitCourse() {
     if (this.id)

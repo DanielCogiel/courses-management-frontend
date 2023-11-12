@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserDataService } from "../../../data-access/user/user-data.service";
-import { first, map, Observable } from "rxjs";
+import { first, map, Observable, tap } from "rxjs";
 import User from "../../../data-access/user/user.model";
 
 @Component({
@@ -12,7 +12,8 @@ export class UserButtonComponent {
   user$: Observable<User | undefined> = this._userDataService.getUser().pipe(
     first(),
     map(response => response.body),
-    map(data => data?.data)
+    map(data => data?.data),
+    tap(user => this._userDataService.setUser(user))
   );
   constructor(private _userDataService: UserDataService) {}
 }

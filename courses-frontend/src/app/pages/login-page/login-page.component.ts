@@ -48,7 +48,9 @@ export class LoginPageComponent extends ErrorHandlerForm {
               duration: 5 * 1000
             });
           },
-          error: error => this._snackbar.open(error.message)
+          error: error =>  this._snackbar.open(error.error.message || 'Nie udało się zalogować.', 'Zamknij', {
+            duration: 5 * 1000
+          })
         })
     }
   }
