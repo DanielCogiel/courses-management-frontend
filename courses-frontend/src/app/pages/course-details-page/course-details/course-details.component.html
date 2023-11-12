@@ -7,7 +7,7 @@
     <div class="content">
       <div class="description">
         <h2>Opis</h2>
-        Lorem ipsu iasf iauhf iaushf iuashf iuashf iuashf iuashifu hasduifh asiudfh
+        {{ details.description ?? 'Kurs nie posiada opisu.' }}
       </div>
       <div class="specifics">
         <div class="item"><strong>Właściciel: </strong>{{details.ownerFirstName + ' ' + details.ownerLastName}}</div>
