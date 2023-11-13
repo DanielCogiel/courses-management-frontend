@@ -39,6 +39,11 @@ const routes: Routes = [
           roles: [Role.ADMIN]
         },
         loadComponent: () => import ('./pages/admin-page/admin-page.component').then(c => c.AdminPageComponent)
+      },
+      {
+        path: 'konto',
+        canActivate: [AuthenticatedGuard],
+        loadComponent: () => import ('./pages/account-info-page/account-info-page.component').then(c => c.AccountInfoPageComponent)
       }
     ]
   },

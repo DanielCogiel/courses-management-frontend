@@ -38,15 +38,39 @@
         <th mat-header-cell *matHeaderCellDef>Akcje</th>
         <td [class.me]="(user$ | async)?.username === user.username" mat-cell *matCellDef="let user">
           <div *ngIf="(user$ | async)?.username !== user.username" class="actions">
-            <button (click)="openPasswordModal(user.username)" mat-mini-fab>
+
+            <button
+              matTooltip="Zmień rolę użytkownika"
+              (click)="openRoleSwapModal(user.username, user.role)"
+              mat-mini-fab
+            >
+              <mat-icon>iso</mat-icon>
+            </button>
+
+            <button
+              matTooltip="Zmień hasło użytkownika"
+              (click)="openPasswordModal(user.username)"
+              mat-mini-fab
+            >
               <mat-icon>change_circle</mat-icon>
             </button>
-            <a mat-mini-fab [href]="'mailto:' + user.email">
+
+            <a
+              matTooltip="Wyślij maila"
+              mat-mini-fab
+              [href]="'mailto:' + user.email"
+            >
               <mat-icon>mail</mat-icon>
             </a>
-            <button (click)="openConfirmationDialog(user.id)" mat-mini-fab>
+
+            <button
+              matTooltip="Usuń użytkownika"
+              (click)="openConfirmationDialog(user.id)"
+              mat-mini-fab
+            >
               <mat-icon>delete</mat-icon>
             </button>
+
           </div>
         </td>
       </ng-container>

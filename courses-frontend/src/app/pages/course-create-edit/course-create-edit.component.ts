@@ -20,6 +20,7 @@ export class CourseCreateEditComponent {
   id?: string;
   formGroup: FormGroup = this._fb.group({
     title: ['', Validators.required],
+    description: [''],
     language: [Language.PL, Validators.required],
     level: [Level.BEGINNER, Validators.required],
     location: ['', Validators.required],

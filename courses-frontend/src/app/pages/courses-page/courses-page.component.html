@@ -1,14 +1,22 @@
 <section>
   <h1>{{ isPersonalPage ? 'Moje kursy' : 'Lista kursów' }}</h1>
   <div class="container">
-    <div class="tile-grid" *ngIf="!loading else loadingTemplate">
-      <app-course
-        *ngFor="let course of data"
-        [data]="course"
-        (onDelete)="openConfirmationModal(course.id)"
-        (onEnroll)="course.isEnrolled ? leaveUserFromCourse(course.id) : enrollUserToCourse(course.id)"
-      ></app-course>
-    </div>
+    <ng-container *ngIf="!loading else loadingTemplate">
+      <div class="tile-grid" *ngIf="data?.length; else noDataTemplate">
+        <app-course
+          *ngFor="let course of data"
+          [data]="course"
+          (onDelete)="openConfirmationModal(course.id)"
+          (onEnroll)="course.isEnrolled ? leaveUserFromCourse(course.id) : enrollUserToCourse(course.id)"
+        ></app-course>
+      </div>
+    </ng-container>
+    <ng-template #noDataTemplate>
+      <p class="no-data-message">
+        {{ isPersonalPage ? 'Nie jesteś właścicielem ani nie jesteś zapisany do żadnego kursu.'
+        : 'Brak kursów do wyświetlenia.' }}
+      </p>
+    </ng-template>
     <ng-template #loadingTemplate>
       <app-loader></app-loader>
     </ng-template>

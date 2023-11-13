@@ -15,4 +15,13 @@ export class UserDataService {
   getUser() {
     return this._api.get<{data: User} | undefined>('/users/me');
   }
+  changePassword(passwords: {password: string, confirmPassword: string}) {
+    return this._api.put<{ message: string }>('/changePassword/mine', passwords);
+  }
+  deleteAccount() {
+    return this._api.delete<{ message: string }>('/users/delete/me');
+  }
+  hasDeletionPermission() {
+    return this._api.get<{canDeleteAccount: boolean}>('/permissions/deleteAccount');
+  }
 }

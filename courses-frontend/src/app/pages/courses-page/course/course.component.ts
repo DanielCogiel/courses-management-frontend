@@ -7,11 +7,12 @@ import { MatIconModule } from "@angular/material/icon";
 import { getLanguageLabel } from "../../../utility/get-language-label.function";
 import { getLevelLabel } from "../../../utility/get-level-label.function";
 import { RouterLink } from "@angular/router";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @Component({
   selector: 'app-course',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule, RouterLink],
+  imports: [CommonModule, MatButtonModule, MatIconModule, RouterLink, MatTooltipModule],
   templateUrl: './course.component.html',
   styleUrls: ['./course.component.scss']
 })

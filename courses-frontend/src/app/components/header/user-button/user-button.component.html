@@ -1,4 +1,8 @@
-<button *ngIf="user$ | async as user" class="user-button">
+<button
+  *ngIf="user$ | async as user"
+  class="user-button"
+  [routerLink]="'konto'"
+>
   <mat-icon>account_circle</mat-icon>
   {{ user.username }}
 </button>

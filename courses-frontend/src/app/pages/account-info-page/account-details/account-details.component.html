@@ -1,0 +1,18 @@
+<div class="details" *ngIf="user$ | async as user">
+  <div class="header-section">
+    <h1>Szczegóły konta</h1>
+    <app-role-badge [role]="user.role"></app-role-badge>
+  </div>
+  <div class="header-grid">
+    <div>Imię</div>
+    <div>Nazwisko</div>
+    <div>Nazwa użytkownika</div>
+    <div>E-mail</div>
+  </div>
+  <div class="details-grid">
+    <div>{{ user.firstName }}</div>
+    <div>{{ user.lastName }}</div>
+    <div>{{ user.username }}</div>
+    <div>{{ user.email }}</div>
+  </div>
+</div>

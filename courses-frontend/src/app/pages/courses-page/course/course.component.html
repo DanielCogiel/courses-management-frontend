@@ -12,20 +12,32 @@
     <div class="header">
       <h2>{{data.title}}</h2>
       <div class="right-section">
+
         <button
+          matTooltip="Pokaż szczegóły"
+          matTooltipPosition="above"
           mat-mini-fab
           (click)="viewClicked()"
           [routerLink]="'/kursy/' + data.id"
           [relativeTo]="null"
         ><mat-icon>remove_red_eye</mat-icon></button>
+
         <button
+          matTooltip="Edytuj"
+          matTooltipPosition="above"
           mat-mini-fab
           *ngIf="data.isOwner"
           (click)="editClicked()"
           [routerLink]="'/kursy/edytuj/' + data.id"
           [relativeTo]="null"
         ><mat-icon>edit</mat-icon></button>
-        <button mat-mini-fab *ngIf="data.isOwner" (click)="deleteClicked()"><mat-icon>delete</mat-icon></button>
+        <button
+          matTooltip="Usuń"
+          matTooltipPosition="above"
+          mat-mini-fab
+          *ngIf="data.isOwner"
+          (click)="deleteClicked()"
+        ><mat-icon>delete</mat-icon></button>
       </div>
     </div>
     <div class="details-section">
@@ -45,6 +57,25 @@
         <mat-icon>location_pin</mat-icon>
         <strong>{{data.location}}</strong>
       </div>
+    </div>
+  </div>
+
+  <div class="badges">
+    <div
+      matTooltip="Jesteś właścicielem"
+      matTooltipPosition="above"
+      class="badge"
+      *ngIf="data.isOwner"
+    >
+      <mat-icon>how_to_reg</mat-icon>
+    </div>
+    <div
+      matTooltip="Jesteś uczestnikiem"
+      matTooltipPosition="above"
+      class="badge"
+      *ngIf="data.isEnrolled"
+    >
+      <mat-icon>school</mat-icon>
     </div>
   </div>
 </div>

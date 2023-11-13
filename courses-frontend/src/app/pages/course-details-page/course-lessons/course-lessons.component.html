@@ -1,6 +1,6 @@
 <div class="panel" *ngIf="lessons$ | async as data">
     <h2>Lekcje</h2>
-    <div class="list">
+    <div *ngIf="data?.length; else noDataTemplate" class="list">
       <mat-expansion-panel *ngFor="let lesson of data">
         <mat-expansion-panel-header>
           <p>
@@ -13,5 +13,8 @@
         </mat-panel-description>
       </mat-expansion-panel>
     </div>
+    <ng-template #noDataTemplate>
+      <span class="no-data">Brak lekcji w kursie.</span>
+    </ng-template>
 </div>
 

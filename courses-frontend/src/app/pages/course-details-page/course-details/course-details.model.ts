@@ -3,6 +3,7 @@ import { Level } from "../../../data-access/level/level.enum";
 
 export interface CourseDetailsModel {
   title: string,
+  description?: string,
   language: Language,
   level: Level,
   location: string,

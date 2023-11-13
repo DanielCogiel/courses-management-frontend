@@ -36,3 +36,16 @@
     }
   }
 }
+
+.no-data {
+  text-align: center;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  border: 3px solid #4c3175;
+  background-color: $main-color;
+  color: white;
+  border-radius: 10px;
+  margin: 6px auto;
+}
