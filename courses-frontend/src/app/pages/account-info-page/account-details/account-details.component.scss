@@ -1,0 +1,41 @@
+@import '../../../styles/scss/variables';
+
+.details {
+  width: 100%;
+  border-radius: 4px;
+  border: 2px solid $main-color;
+  color: white;
+  background-color: $main-color-lighter;
+  padding: 30px;
+
+  .header-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    h1 {
+      font-weight: bold;
+      margin: 0;
+    }
+  }
+
+  .details-grid, .header-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+
+    div {
+      font-weight: bold;
+      text-align: center;
+      padding: 8px 12px;
+    }
+  }
+
+  .details-grid div {
+    background-color: white;
+    color: $main-color;
+    border-radius: 4px;
+    margin-top: 6px;
+  }
+
+}

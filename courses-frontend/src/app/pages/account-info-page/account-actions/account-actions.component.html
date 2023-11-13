@@ -1,0 +1,17 @@
+<div class="actions">
+  <h1>Akcje</h1>
+  <button (click)="openPasswordModal()" mat-fab extended>
+    <mat-icon>change_circle</mat-icon>
+    Zmień hasło
+  </button>
+  <button
+    [disabled]="!(canDeleteAccount$ | async)"
+    (click)="openConfirmationDialog()"
+    color="warn"
+    mat-fab
+    extended
+  >
+    <mat-icon>delete</mat-icon>
+    Usuń moje konto
+  </button>
+</div>

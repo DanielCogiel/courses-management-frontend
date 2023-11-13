@@ -1,0 +1,21 @@
+@import '../../../styles/scss/variables';
+
+.actions {
+  width: 100%;
+  border-radius: 4px;
+  border: 2px solid $main-color;
+  color: white;
+  background-color: $main-color-lighter;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  h1 {
+    font-weight: bold;
+  }
+
+  button {
+    width: 100%;
+  }
+}
