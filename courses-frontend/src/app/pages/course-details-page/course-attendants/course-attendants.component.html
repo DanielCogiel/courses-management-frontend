@@ -1,9 +1,14 @@
 <div class="panel" *ngIf="attendants$ | async as data">
   <h2>Uczestnicy</h2>
   <div class="users">
-    <div class="item" *ngFor="let user of data">
-      <mat-icon>account_circle</mat-icon>
-      <span>{{ user.firstName + ' ' + user.lastName + ' (' + user.username + ')' }}</span>
-    </div>
+    <ng-container *ngIf="data?.length; else noDataTemplate">
+      <div class="item" *ngFor="let user of data">
+        <mat-icon>account_circle</mat-icon>
+        <span>{{ user.firstName + ' ' + user.lastName + ' (' + user.username + ')' }}</span>
+      </div>
+    </ng-container>
+    <ng-template #noDataTemplate>
+      <span class="no-data">Brak uczestników kursu.</span>
+    </ng-template>
   </div>
 </div>

@@ -9,6 +9,7 @@
   border-radius: 4px;
   display: flex;
   width: 100%;
+  position: relative;
 
   .image-section {
     display: flex;
@@ -80,6 +81,31 @@
 
       span, strong {
         font-size: 1rem;
+      }
+    }
+  }
+
+  .badges {
+    position: absolute;
+    left: -10px;
+    top: -20px;
+    display: flex;
+    gap: 5px;
+
+    .badge {
+      padding: 2px;
+      border: 2px solid black;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      background-color: $secondary-color;
+
+      mat-icon {
+        color: black;
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
   }

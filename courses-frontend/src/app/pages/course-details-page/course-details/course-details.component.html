@@ -1,6 +1,6 @@
 <div class="details" *ngIf="details$ | async as details">
   <div class="image-wrapper">
-    <img [src]="getImageUrl(details.image_path)">
+    <img [src]="getImageUrl(details.image_path)" alt="Brak obrazu.">
   </div>
   <div class="content-container">
     <h2>{{ details.title }}</h2>

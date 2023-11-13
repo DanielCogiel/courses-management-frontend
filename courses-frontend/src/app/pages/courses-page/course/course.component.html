@@ -59,4 +59,23 @@
       </div>
     </div>
   </div>
+
+  <div class="badges">
+    <div
+      matTooltip="Jesteś właścicielem"
+      matTooltipPosition="above"
+      class="badge"
+      *ngIf="data.isOwner"
+    >
+      <mat-icon>how_to_reg</mat-icon>
+    </div>
+    <div
+      matTooltip="Jesteś uczestnikiem"
+      matTooltipPosition="above"
+      class="badge"
+      *ngIf="data.isEnrolled"
+    >
+      <mat-icon>school</mat-icon>
+    </div>
+  </div>
 </div>
