@@ -1,8 +1,19 @@
-<button
-  *ngIf="user$ | async as user"
-  class="user-button"
-  [routerLink]="'konto'"
->
-  <mat-icon>account_circle</mat-icon>
-  {{ user.username }}
-</button>
+<ng-container *ngIf="user$ | async as user">
+  <button
+    *ngIf="(isMobile$ | async) === false"
+    class="user-button"
+    [routerLink]="'konto'"
+    matTooltip="Przejdź do konta"
+  >
+    <mat-icon>account_circle</mat-icon>
+    {{ user.username }}
+  </button>
+  <button
+    *ngIf="isMobile$ | async"
+    mat-mini-fab
+    [routerLink]="'konto'"
+    matTooltip="Przejdź do konta"
+  >
+    <mat-icon>account_circle</mat-icon>
+  </button>
+</ng-container>

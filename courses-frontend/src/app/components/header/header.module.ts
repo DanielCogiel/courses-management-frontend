@@ -8,16 +8,18 @@ import { TimerComponent } from './timer/timer.component';
 import { TimePipe } from "../../data-access/timer/time.pipe";
 import { HasRolesDirective } from "../../data-access/role/has-roles.directive";
 import { RouterLink } from "@angular/router";
+import { MatTooltipModule } from "@angular/material/tooltip";
 @NgModule({
   declarations: [HeaderComponent, UserButtonComponent, TimerComponent],
   exports: [HeaderComponent],
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatIconModule,
-    TimePipe,
-    HasRolesDirective,
-    RouterLink
-  ]
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        MatIconModule,
+        TimePipe,
+        HasRolesDirective,
+        RouterLink,
+        MatTooltipModule
+    ]
 })
 export class HeaderModule { }

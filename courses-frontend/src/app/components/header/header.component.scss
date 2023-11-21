@@ -2,6 +2,7 @@
 
 section {
   display: flex;
+  gap: 20px;
   justify-content: space-between;
   align-items: center;
   height: 90px;
@@ -25,6 +26,10 @@ section {
       margin: 0;
       font-weight: bold;
       color: white;
+
+      @media(max-width: 710px) {
+        display: none;
+      }
     }
   }
   .right-section {

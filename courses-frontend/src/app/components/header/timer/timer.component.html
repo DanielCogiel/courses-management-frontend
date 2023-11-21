@@ -1,4 +1,4 @@
-<div id="timer">
+<div matTooltip="Czas trwania sesji" id="timer">
   <mat-icon>access_time</mat-icon>
   {{ ((time$ | async) ?? 0) | time}}
 </div>
