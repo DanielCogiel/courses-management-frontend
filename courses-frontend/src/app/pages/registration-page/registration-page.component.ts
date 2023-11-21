@@ -22,8 +22,8 @@ import { first } from "rxjs";
 export class RegistrationPageComponent {
   formGroup: FormGroup = this._fb.group({
     username: ['', [Validators.required, Validators.maxLength(255)]],
-    password: ['', [Validators.required, Validators.maxLength(60)]],
-    confirmPassword: ['', [Validators.required, Validators.maxLength(60), passwordMatchValidator]],
+    password: ['', [Validators.required, Validators.maxLength(60), Validators.pattern(/^(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])(?=.*\d)(?=.*[A-Z]).{8,}$/)]],
+    confirmPassword: ['', [Validators.required, Validators.maxLength(60), Validators.pattern(/^(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])(?=.*\d)(?=.*[A-Z]).{8,}$/), passwordMatchValidator]],
     firstName: ['', [Validators.required, Validators.maxLength(50)]],
     lastName: ['', [Validators.required, Validators.maxLength(50)]],
     email: ['', [Validators.required, Validators.email, Validators.maxLength(255)]],
