@@ -17,17 +17,19 @@ import { PasswordChangeModalComponent } from "./password-change-modal/password-c
 import { PermissionChangeModalComponent } from "./permission-change-modal/permission-change-modal.component";
 import Role from "../../data-access/role/role.enum";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { AdminPageFiltersComponent } from "./admin-page-filters/admin-page-filters.component";
 
 @Component({
   selector: 'app-admin-page',
   templateUrl: './admin-page.component.html',
   styleUrls: ['./admin-page.component.scss'],
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatIconModule, MatButtonModule, LoaderComponent, RoleBadgeComponent, MatTooltipModule]
+  imports: [CommonModule, MatTableModule, MatIconModule, MatButtonModule, LoaderComponent, RoleBadgeComponent, MatTooltipModule, AdminPageFiltersComponent]
 })
 export class AdminPageComponent implements OnDestroy {
   user$ = this._userDataService.user$
   columns = ['firstName', 'lastName', 'username', 'email', 'role', 'actions'];
+  filters: {username: string | null, role: Role | null} = {username: '', role: null};
   reset$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   destroy$: Subject<void> = new Subject<void>();
   loading: boolean = false;
@@ -56,6 +58,21 @@ export class AdminPageComponent implements OnDestroy {
   }
   _refresh() {
     this.reset$.next(true);
+  }
+  applyFilters(filters: {username: string | null, role: Role | null}) {
+    this.filters = filters;
+  }
+  getFilteredUsers(): User[] | undefined {
+    return this.users?.filter((user: User) => {
+      let shouldAdd = true;
+      Object.keys(this.filters).forEach(key => {
+        // @ts-ignore
+        if (this.filters[key] && !user[key].includes(this.filters[key])) {
+          shouldAdd = false;
+        }
+      })
+      return shouldAdd;
+    })
   }
   openPasswordModal(username: string) {
     const changePasswordDialog = this._dialog.open(PasswordChangeModalComponent);

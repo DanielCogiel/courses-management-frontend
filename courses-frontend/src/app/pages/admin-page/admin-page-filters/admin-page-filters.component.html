@@ -1,0 +1,27 @@
+<form [formGroup]="formGroup" class="row">
+
+  <mat-form-field class="col-md-4">
+    <mat-label>Nazwa użytkownika</mat-label>
+    <input type="text" matInput formControlName="username">
+  </mat-form-field>
+
+  <mat-form-field class="col-md-4">
+    <mat-label>Typ użytkownika</mat-label>
+    <mat-select formControlName="role">
+      <mat-option *ngFor="let role of roles" [value]="role.role">{{ role.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="button-container col-md-2">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="applyFilters()"
+    >Zastosuj</button>
+  </div>
+
+  <div class="button-container col-md-2">
+    <button (click)="clear()" mat-raised-button>Wyczyść</button>
+  </div>
+
+</form>

@@ -1,10 +1,12 @@
 <section>
   <h1>Panel administracyjny</h1>
   <div class="container">
+    <app-admin-page-filters (onFilterApplied)="applyFilters($event)"></app-admin-page-filters>
+
     <table
       *ngIf="!loading; else loadingTemplate"
       mat-table
-      [dataSource]="users ?? []"
+      [dataSource]="getFilteredUsers() ?? []"
       class="mat-elevation-z8"
     >
       <ng-container matColumnDef="firstName">
