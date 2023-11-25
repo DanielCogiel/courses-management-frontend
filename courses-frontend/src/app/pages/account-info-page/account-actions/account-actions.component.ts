@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { PasswordChangeModalComponent } from "../../admin-page/password-change-modal/password-change-modal.component";
-import { first, map, Observable, of, tap } from "rxjs";
+import { first, map, tap } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { UserDataService } from "../../../data-access/user/user-data.service";
 import { MatSnackBar } from "@angular/material/snack-bar";

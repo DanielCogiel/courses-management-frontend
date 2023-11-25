@@ -9,16 +9,19 @@
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="hasError('date')">{{getError('date')}}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="col">
         <mat-label>Godzina rozpoczęcia</mat-label>
         <input matInput type="time" formControlName="timeStart">
+        <mat-error *ngIf="hasError('timeStart')">{{getError('timeStart')}}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="col">
         <mat-label>Godzina zakończenia</mat-label>
         <input matInput type="time" formControlName="timeFinish">
+        <mat-error *ngIf="hasError('timeFinish')">{{getError('timeFinish')}}</mat-error>
       </mat-form-field>
     </div>
 
@@ -26,6 +29,7 @@
       <mat-form-field class="col">
         <mat-label>Nazwa lekcji</mat-label>
         <input matInput type="text" formControlName="title">
+        <mat-error *ngIf="hasError('title')">{{getError('title')}}</mat-error>
       </mat-form-field>
     </div>
 
@@ -33,6 +37,7 @@
       <mat-form-field class="col">
         <mat-label>Opis lekcji (opcjonalny)</mat-label>
         <textarea matInput formControlName="description"></textarea>
+        <mat-error *ngIf="hasError('description')">{{getError('description')}}</mat-error>
       </mat-form-field>
     </div>
 
