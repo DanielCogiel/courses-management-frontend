@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { dateFormatter } from "../../utility/date-formatter.function";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmationModalComponent } from "../../components/confirmation-modal/confirmation-modal.component";
+import { sortLessons } from "../../utility/sort-lessons.function";
 
 @Component({
   selector: 'app-course-create-edit',
@@ -81,7 +82,7 @@ export class CourseCreateEditComponent {
 
     let formData = new FormData();
     const {image, ...values} = this.formGroup.getRawValue();
-
+    console.log(this.datetimes)
     formData.append('image', image);
     formData.append('datetimes', JSON.stringify(this.datetimes));
     Object.entries(values).forEach(([key, value]) => {

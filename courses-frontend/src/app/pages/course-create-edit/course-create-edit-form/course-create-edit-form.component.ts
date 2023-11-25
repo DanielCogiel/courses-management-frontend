@@ -50,7 +50,8 @@ export class CourseCreateEditFormComponent extends ErrorHandlerForm {
             const validation = this._validateLessonOverlapping(tempLessons as CourseLessonModel[], lessonObj);
 
             if (validation.valid) {
-              this.lessons = tempLessons;
+              this.lessons.push(lessonObj);
+              this._sortLessons();
               this._coursesService.lessonsDirty$.next(true);
             } else {
               this._snackbar.open(`Czas podanej lekcji nakłada się z lekcją ${validation.overlapObj?.title}.`, 'Zamknij', {
@@ -60,6 +61,11 @@ export class CourseCreateEditFormComponent extends ErrorHandlerForm {
           }
         }
       });
+  }
+  private _sortLessons() {
+    this.lessons.sort((lessonA, lessonB) => {
+      return parseDateTimeStrings(lessonA.date, lessonA.timeStart).getTime() - parseDateTimeStrings(lessonB.date, lessonB.timeStart).getTime();
+    })
   }
   private _validateLessonOverlapping(lessons: CourseLessonModel [], checkedLesson: CourseLessonModel) {
     let validationObj: {
