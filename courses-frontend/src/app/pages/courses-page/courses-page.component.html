@@ -1,6 +1,7 @@
 <section>
   <h1>{{ isPersonalPage ? 'Moje kursy' : 'Lista kursów' }}</h1>
   <div class="container">
+    <app-courses-filters (onFilterApplied)="applyFilters($event)"></app-courses-filters>
     <ng-container *ngIf="!loading else loadingTemplate">
       <div class="tile-grid" *ngIf="data?.length; else noDataTemplate">
         <app-course

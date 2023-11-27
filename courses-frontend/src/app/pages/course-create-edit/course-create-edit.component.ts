@@ -102,8 +102,8 @@ export class CourseCreateEditComponent {
           duration: 5 * 1000
         })
         this._router.navigate(['kursy']);
-      }, error: (response: {message: string}) => {
-        this._snackbar.open(response.message || 'Nie udało się dodać kursu.', 'Zamknij', {
+      }, error: (error) => {
+        this._snackbar.open(error.error.message || 'Nie udało się dodać kursu.', 'Zamknij', {
           duration: 5 * 1000
         })
       }
@@ -136,8 +136,8 @@ export class CourseCreateEditComponent {
             duration: 5 * 1000
           })
           this._router.navigate(['kursy']);
-        }, error: (response: {message: string}) => {
-          this._snackbar.open(response.message || 'Nie udało się dodać kursu.', 'Zamknij', {
+        }, error: (error) => {
+          this._snackbar.open(error.error.message || 'Nie udało się dodać kursu.', 'Zamknij', {
             duration: 5 * 1000
           })
         }

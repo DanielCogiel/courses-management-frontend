@@ -1,0 +1,52 @@
+<form [formGroup]="formGroup">
+
+  <div class="row">
+    <mat-form-field class="col">
+      <mat-label>Nazwa kursu</mat-label>
+      <input type="text" matInput formControlName="title">
+    </mat-form-field>
+
+    <mat-form-field class="col">
+      <mat-label>Poziom</mat-label>
+      <mat-select formControlName="level">
+        <mat-option *ngFor="let level of levels" [value]="level.value">{{ level.label }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="button-container col-md-2">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="applyFilters()"
+      >Zastosuj</button>
+    </div>
+
+    <div class="button-container col-md-2">
+      <button (click)="clear()" mat-raised-button>Wyczyść</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <mat-form-field class="col">
+      <mat-label>Język</mat-label>
+      <mat-select formControlName="language">
+        <mat-option *ngFor="let language of languages" [value]="language.value">{{ language.label }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="col">
+      <mat-label>Od (data rozpoczęcia)</mat-label>
+      <input matInput formControlName="dateStart" [matDatepicker]="picker">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="col">
+      <mat-label>Do (data rozpoczęcia)</mat-label>
+      <input matInput formControlName="dateFinish" [matDatepicker]="pickerFinish">
+      <mat-datepicker-toggle matIconSuffix [for]="pickerFinish"></mat-datepicker-toggle>
+      <mat-datepicker #pickerFinish></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+</form>

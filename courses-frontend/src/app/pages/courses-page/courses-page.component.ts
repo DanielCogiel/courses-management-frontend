@@ -11,11 +11,13 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router, RouterLink } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmationModalComponent } from "../../components/confirmation-modal/confirmation-modal.component";
+import { CoursesFiltersComponent, CoursesFiltersModel } from "./courses-filters/courses-filters.component";
+import User from "../../data-access/user/user.model";
 
 @Component({
   selector: 'app-courses-page',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, CourseComponent, LoaderComponent],
+  imports: [CommonModule, MatButtonModule, CourseComponent, LoaderComponent, CoursesFiltersComponent],
   templateUrl: './courses-page.component.html',
   styleUrls: ['./courses-page.component.scss']
 })
@@ -23,6 +25,7 @@ export class CoursesPageComponent implements OnDestroy {
   loading: boolean = true;
   refresh$ = this._coursesService.refresh$;
   destroy$: Subject<void> = new Subject<void>();
+  filters: CoursesFiltersModel = {title: '', level: undefined, language: undefined, dateStart: undefined, dateFinish: undefined};
   isPersonalPage = this._router.url === '/kursy/moje';
   data$: Observable<CourseModel [] | null> = this.refresh$
     .pipe(
@@ -114,6 +117,39 @@ export class CoursesPageComponent implements OnDestroy {
         })
       }
     })
+  }
+  getFilteredCourses() {
+    return this.data?.filter((course: CourseModel) => {
+      let shouldAdd = true;
+      Object.keys(this.filters).forEach(key => {
+        // @ts-ignore
+        if (this.filters[key] && key === 'dateStart') {
+          const date = new Date();
+          const segments = course.firstLesson?.date.split('-').map(str => parseInt(str));
+          const timeSegments = course.firstLesson?.timeStart.split(':').map(str => parseInt(str));
+          if (segments && timeSegments) {
+            date.setFullYear(segments[0]);
+            date.setMonth(segments[1]);
+            date.setDate(segments[2]);
+            date.setHours(timeSegments[0]);
+            date.setMinutes(timeSegments[1]);
+          }
+          console.log(date)
+          console.log(this.filters[key])
+          // @ts-ignore
+          shouldAdd = date.getTime() > (this.filters[key] as Date).getTime();
+        }
+        // @ts-ignore
+        if (typeof course[key] === 'string' && this.filters[key] && !course[key].includes(this.filters[key])) {
+          shouldAdd = false;
+        }
+      })
+      return shouldAdd;
+    })
+  }
+  applyFilters(filters: CoursesFiltersModel) {
+    this.filters = filters;
+    console.log(this.filters)
   }
   ngOnDestroy() {
     this.destroy$.next();
