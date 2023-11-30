@@ -8,8 +8,8 @@
     </mat-form-field>
 
     <div class="col-md-3 file-uploader">
-      <input id="fileInput" type="file" (change)="chooseImage($event)">
-      <label for="fileInput">Wybierz obraz</label>
+      <input id="fileInput" type="file" accept=".jpg,.png" (change)="chooseImage($event)">
+      <label matTooltip="Dozwolone rozszerzenia: PNG, JPG" for="fileInput">Wybierz obraz</label>
     </div>
   </div>
 

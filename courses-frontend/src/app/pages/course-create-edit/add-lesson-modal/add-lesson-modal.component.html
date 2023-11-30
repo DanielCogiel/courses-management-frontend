@@ -5,7 +5,7 @@
     <div class="row lesson-row">
       <mat-form-field class="col">
         <mat-label>Wybierz datę lekcji</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="date">
+        <input [min]="now" matInput [matDatepicker]="picker" formControlName="date">
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>

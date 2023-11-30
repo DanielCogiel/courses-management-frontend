@@ -19,6 +19,11 @@ export class AddLessonModalComponent extends ErrorHandlerForm {
     timeStart: ['', [Validators.required]],
     timeFinish: ['', [Validators.required]]
   })
+  get now() {
+    const today = new Date();
+    today.setDate(today.getDate() + 1);
+    return today;
+  }
   constructor(
     public dialogRef: MatDialogRef<AddLessonModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: CourseLessonModel,

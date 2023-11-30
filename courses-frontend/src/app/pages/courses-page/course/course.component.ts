@@ -33,19 +33,17 @@ export class CourseComponent {
 
     const today = new Date();
     const dateData = dateFromData.split('T')[0];
-    const dateFilter = today.toISOString().split('T')[0];
 
-    const [dataYear, dataMonth, dataDay] = dateData.split('-').map(str => parseInt(str));
-    let [filterYear, filterMonth, filterDay] = dateFilter.split('-').map(str => parseInt(str));
-    filterDay++;
+    let [dataYear, dataMonth, dataDay] = dateData.split('-').map(str => parseInt(str));
+    dataDay++;
 
-    if (dataYear === filterYear) {
-      if (dataMonth === filterMonth) {
-        return dataDay <= filterDay;
+    if (dataYear === today.getFullYear()) {
+      if (dataMonth === today.getMonth() + 1) {
+        return dataDay <= today.getDate();
       }
-      return dataMonth < filterMonth;
+      return dataMonth < today.getMonth() + 1;
     }
-    return dataYear < filterYear
+    return dataYear < today.getFullYear();
   }
   getImageUrl() {
     return `${SERVER_URL}/${this.data?.image_path}`;

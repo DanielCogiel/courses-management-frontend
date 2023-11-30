@@ -161,14 +161,32 @@ export class CoursesPageComponent implements OnDestroy {
     }
     return dataYear < filterYear
   }
+  private _isDateLesserThanToday(dateFromData?: string) {
+    if (!dateFromData)
+      return false;
+
+    const today = new Date();
+    const dateData = dateFromData.split('T')[0];
+
+    let [dataYear, dataMonth, dataDay] = dateData.split('-').map(str => parseInt(str));
+    dataDay++;
+
+    if (dataYear === today.getFullYear()) {
+      if (dataMonth === today.getMonth() + 1) {
+        return dataDay <= today.getDate();
+      }
+      return dataMonth < today.getMonth() + 1;
+    }
+    return dataYear < today.getFullYear();
+  }
   getFilteredCourses() {
     const filteredWithStatus = this.data?.filter((course: CourseModel) => {
       const today = new Date();
       if (this.filters.status === null || this.filters.status === undefined)
         return true;
 
-      return this.filters.status === 'active' ? this._isDateGreater(course.lastLesson?.date, today) :
-      this._isDateLesser(course.lastLesson?.date, today);
+      return this.filters.status === 'active' ? !this._isDateLesserThanToday(course.lastLesson?.date)
+        : this._isDateLesserThanToday(course.lastLesson?.date) ;
     })
 
     const filteredWithDates = filteredWithStatus?.filter((course: CourseModel) => {

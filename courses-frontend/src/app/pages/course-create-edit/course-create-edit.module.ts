@@ -16,6 +16,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { LoaderComponent } from "../../components/loader/loader.component";
 import { AddLessonModalComponent } from './add-lesson-modal/add-lesson-modal.component';
 import { MatDialogModule } from "@angular/material/dialog";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -23,31 +24,32 @@ import { MatDialogModule } from "@angular/material/dialog";
     CourseCreateEditFormComponent,
     AddLessonModalComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild([
-      {
-        path: 'edytuj/:id',
-        component: CourseCreateEditComponent
-      },
-      {
-        path: 'utworz',
-        component: CourseCreateEditComponent
-      }
-    ]),
-    MatButtonModule,
-    MatCardModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    FormsModule,
-    MatChipsModule,
-    MatOptionModule,
-    MatSelectModule,
-    LoaderComponent,
-    MatDialogModule,
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild([
+            {
+                path: 'edytuj/:id',
+                component: CourseCreateEditComponent
+            },
+            {
+                path: 'utworz',
+                component: CourseCreateEditComponent
+            }
+        ]),
+        MatButtonModule,
+        MatCardModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule,
+        FormsModule,
+        MatChipsModule,
+        MatOptionModule,
+        MatSelectModule,
+        LoaderComponent,
+        MatDialogModule,
+        MatTooltipModule,
+    ]
 })
 export class CourseCreateEditModule { }
