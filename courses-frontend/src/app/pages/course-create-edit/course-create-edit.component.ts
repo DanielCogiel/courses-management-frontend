@@ -82,7 +82,6 @@ export class CourseCreateEditComponent {
 
     let formData = new FormData();
     const {image, ...values} = this.formGroup.getRawValue();
-    console.log(this.datetimes)
     formData.append('image', image);
     formData.append('datetimes', JSON.stringify(this.datetimes));
     Object.entries(values).forEach(([key, value]) => {

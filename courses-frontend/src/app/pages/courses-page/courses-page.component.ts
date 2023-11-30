@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from "@angular/material/button";
 import { ApiService } from "../../api/api.service";
-import { finalize, first, map, Observable, Subject, switchMap, takeUntil, tap } from "rxjs";
+import { filter, finalize, first, map, Observable, Subject, switchMap, takeUntil, tap } from "rxjs";
 import CourseModel from "./course/course.model";
 import { CoursesPageService } from "./courses-page.service";
 import { CourseComponent } from "./course/course.component";
@@ -26,6 +26,7 @@ export class CoursesPageComponent implements OnDestroy {
   refresh$ = this._coursesService.refresh$;
   destroy$: Subject<void> = new Subject<void>();
   filters: CoursesFiltersModel = {title: '', level: undefined, language: undefined, dateStart: undefined, dateFinish: undefined};
+  filtersStrKeys = ['title', 'level', 'language']
   isPersonalPage = this._router.url === '/kursy/moje';
   data$: Observable<CourseModel [] | null> = this.refresh$
     .pipe(
@@ -118,29 +119,68 @@ export class CoursesPageComponent implements OnDestroy {
       }
     })
   }
+  private _isDateGreater(dateFromData?: string, dateFromFilter?: Date) {
+    if (!dateFromFilter)
+      return true;
+    if (!dateFromData)
+      return false;
+
+    const dateData = dateFromData.split('T')[0];
+    const dateFilter = dateFromFilter.toISOString().split('T')[0];
+
+    const [dataYear, dataMonth, dataDay] = dateData.split('-').map(str => parseInt(str));
+    let [filterYear, filterMonth, filterDay] = dateFilter.split('-').map(str => parseInt(str));
+    filterDay++;
+
+    if (dataYear === filterYear) {
+      if (dataMonth === filterMonth) {
+        return dataDay >= filterDay;
+      }
+      return dataMonth > filterMonth;
+    }
+    return dataYear > filterYear
+  }
+  private _isDateLesser(dateFromData?: string, dateFromFilter?: Date) {
+    if (!dateFromFilter)
+      return true;
+    if (!dateFromData)
+      return false;
+
+    const dateData = dateFromData.split('T')[0];
+    const dateFilter = dateFromFilter.toISOString().split('T')[0];
+
+    const [dataYear, dataMonth, dataDay] = dateData.split('-').map(str => parseInt(str));
+    let [filterYear, filterMonth, filterDay] = dateFilter.split('-').map(str => parseInt(str));
+    filterDay++;
+
+    if (dataYear === filterYear) {
+      if (dataMonth === filterMonth) {
+        return dataDay <= filterDay;
+      }
+      return dataMonth < filterMonth;
+    }
+    return dataYear < filterYear
+  }
   getFilteredCourses() {
-    return this.data?.filter((course: CourseModel) => {
+    const filteredWithStatus = this.data?.filter((course: CourseModel) => {
+      const today = new Date();
+      if (this.filters.status === null || this.filters.status === undefined)
+        return true;
+
+      return this.filters.status === 'active' ? this._isDateGreater(course.lastLesson?.date, today) :
+      this._isDateLesser(course.lastLesson?.date, today);
+    })
+
+    const filteredWithDates = filteredWithStatus?.filter((course: CourseModel) => {
+      return this._isDateGreater(course.firstLesson?.date, this.filters.dateStart as unknown as Date)
+        && this._isDateLesser(course.lastLesson?.date, this.filters.dateFinish as unknown as Date)
+    })
+
+    return filteredWithDates?.filter((course: CourseModel) => {
       let shouldAdd = true;
-      Object.keys(this.filters).forEach(key => {
+      this.filtersStrKeys.forEach(key => {
         // @ts-ignore
-        if (this.filters[key] && key === 'dateStart') {
-          const date = new Date();
-          const segments = course.firstLesson?.date.split('-').map(str => parseInt(str));
-          const timeSegments = course.firstLesson?.timeStart.split(':').map(str => parseInt(str));
-          if (segments && timeSegments) {
-            date.setFullYear(segments[0]);
-            date.setMonth(segments[1]);
-            date.setDate(segments[2]);
-            date.setHours(timeSegments[0]);
-            date.setMinutes(timeSegments[1]);
-          }
-          console.log(date)
-          console.log(this.filters[key])
-          // @ts-ignore
-          shouldAdd = date.getTime() > (this.filters[key] as Date).getTime();
-        }
-        // @ts-ignore
-        if (typeof course[key] === 'string' && this.filters[key] && !course[key].includes(this.filters[key])) {
+        if (this.filters[key] && !course[key].includes(this.filters[key])) {
           shouldAdd = false;
         }
       })
@@ -149,7 +189,6 @@ export class CoursesPageComponent implements OnDestroy {
   }
   applyFilters(filters: CoursesFiltersModel) {
     this.filters = filters;
-    console.log(this.filters)
   }
   ngOnDestroy() {
     this.destroy$.next();

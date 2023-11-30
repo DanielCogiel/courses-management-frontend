@@ -12,17 +12,19 @@ import { Language, languages } from "../../../data-access/language/language.enum
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatIconModule } from "@angular/material/icon";
 export interface CoursesFiltersModel {
   title: string,
   level?: Level,
   language?: Language,
   dateStart?: string,
-  dateFinish?: string
+  dateFinish?: string,
+  status?: 'active' | 'finished'
 }
 @Component({
   selector: 'app-courses-filters',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, ReactiveFormsModule, MatDatepickerModule, MatCheckboxModule, MatTooltipModule],
+  imports: [CommonModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, ReactiveFormsModule, MatDatepickerModule, MatCheckboxModule, MatTooltipModule, MatIconModule],
   templateUrl: './courses-filters.component.html',
   styleUrls: ['./courses-filters.component.scss']
 })
@@ -32,7 +34,8 @@ export class CoursesFiltersComponent {
     level: [undefined],
     language: [undefined],
     dateStart: [undefined],
-    dateFinish: [undefined]
+    dateFinish: [undefined],
+    status: [undefined]
   });
   readonly levels = levels;
   readonly languages = languages;
@@ -44,5 +47,8 @@ export class CoursesFiltersComponent {
   clear() {
     this.formGroup.reset();
     this.applyFilters();
+  }
+  clearField(field: string) {
+    this.formGroup.get(field)?.reset();
   }
 }

@@ -1,4 +1,4 @@
-<div *ngIf="data" class="course">
+<div *ngIf="data" class="course" [class.finished]="isFinished()">
   <div class="image-section">
     <img [src]="getImageUrl()">
     <div class="sign-section">
@@ -58,6 +58,8 @@
         <strong>{{data.location}}</strong>
       </div>
     </div>
+
+    <div class="finished-badge" *ngIf="isFinished()">Zakończony</div>
   </div>
 
   <div class="badges">

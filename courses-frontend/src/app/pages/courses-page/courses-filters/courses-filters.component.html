@@ -11,6 +11,7 @@
       <mat-select formControlName="level">
         <mat-option *ngFor="let level of levels" [value]="level.value">{{ level.label }}</mat-option>
       </mat-select>
+      <mat-icon matPrefix (click)="clearField('level')">close</mat-icon>
     </mat-form-field>
 
     <div class="button-container col-md-2">
@@ -32,6 +33,16 @@
       <mat-select formControlName="language">
         <mat-option *ngFor="let language of languages" [value]="language.value">{{ language.label }}</mat-option>
       </mat-select>
+      <mat-icon matPrefix (click)="clearField('language')">close</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="col">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="active">Aktywne</mat-option>
+        <mat-option value="finished">Zakończone</mat-option>
+      </mat-select>
+      <mat-icon matPrefix (click)="clearField('status')">close</mat-icon>
     </mat-form-field>
 
     <mat-form-field class="col">
@@ -39,6 +50,7 @@
       <input matInput formControlName="dateStart" [matDatepicker]="picker">
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+      <mat-icon matPrefix (click)="clearField('dateStart')">close</mat-icon>
     </mat-form-field>
 
     <mat-form-field class="col">
@@ -46,6 +58,7 @@
       <input matInput formControlName="dateFinish" [matDatepicker]="pickerFinish">
       <mat-datepicker-toggle matIconSuffix [for]="pickerFinish"></mat-datepicker-toggle>
       <mat-datepicker #pickerFinish></mat-datepicker>
+      <mat-icon matPrefix (click)="clearField('dateFinish')">close</mat-icon>
     </mat-form-field>
   </div>
 
