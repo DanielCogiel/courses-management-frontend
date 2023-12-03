@@ -22,11 +22,11 @@ export class CourseCreateEditComponent {
   submitLoading: boolean = false;
   id?: string;
   formGroup: FormGroup = this._fb.group({
-    title: ['', Validators.required],
-    description: [''],
+    title: ['', [Validators.required, Validators.maxLength(100)]],
+    description: ['', Validators.maxLength(1000)],
     language: [Language.PL, Validators.required],
     level: [Level.BEGINNER, Validators.required],
-    location: ['', Validators.required],
+    location: ['', [Validators.required, Validators.maxLength(100)]],
     trainer_id: ['', Validators.required],
     image: [null]
   });
