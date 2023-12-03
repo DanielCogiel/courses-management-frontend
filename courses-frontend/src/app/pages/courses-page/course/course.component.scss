@@ -11,6 +11,10 @@
   width: 100%;
   position: relative;
 
+  &.finished {
+    opacity: 0.5;
+  }
+
   .image-section {
     display: flex;
     flex-direction: column;
@@ -35,6 +39,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    position: relative;
     .header {
       width: 100%;
       display: flex;
@@ -109,4 +114,16 @@
       }
     }
   }
+}
+
+.finished-badge {
+  position: absolute;
+  z-index: 2;
+  right: 10px;
+  bottom: 10px;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  border-radius: 4px;
+  padding: 5px;
 }

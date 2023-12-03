@@ -24,7 +24,27 @@ export class CourseComponent {
   @Input() data?: CourseModel;
   readonly getLanguageLabel = getLanguageLabel
   readonly getLevelLabel = getLevelLabel;
+  isFinished() {
+    return this._isDateLesserThanToday(this.data?.lastLesson?.date);
+  }
+  private _isDateLesserThanToday(dateFromData?: string) {
+    if (!dateFromData)
+      return false;
 
+    const today = new Date();
+    const dateData = dateFromData.split('T')[0];
+
+    let [dataYear, dataMonth, dataDay] = dateData.split('-').map(str => parseInt(str));
+    dataDay++;
+
+    if (dataYear === today.getFullYear()) {
+      if (dataMonth === today.getMonth() + 1) {
+        return dataDay <= today.getDate();
+      }
+      return dataMonth < today.getMonth() + 1;
+    }
+    return dataYear < today.getFullYear();
+  }
   getImageUrl() {
     return `${SERVER_URL}/${this.data?.image_path}`;
   }

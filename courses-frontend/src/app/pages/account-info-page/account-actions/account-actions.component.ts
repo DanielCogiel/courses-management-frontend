@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { PasswordChangeModalComponent } from "../../admin-page/password-change-modal/password-change-modal.component";
-import { first, map, Observable, of } from "rxjs";
+import { first, map, tap } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { UserDataService } from "../../../data-access/user/user-data.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -19,7 +19,7 @@ import { ConfirmationModalComponent } from "../../../components/confirmation-mod
   imports: [CommonModule, MatButtonModule, MatIconModule]
 })
 export class AccountActionsComponent {
-  canDeleteAccount$: Observable<boolean | undefined> = of(false);
+  canDeleteAccount: boolean = false;
   constructor(
     private _dialog: MatDialog,
     private _userDataService: UserDataService,
@@ -28,13 +28,16 @@ export class AccountActionsComponent {
   ) {
     this._userDataService.user$.subscribe(user => {
       if (user?.role === Role.ADMIN)
-        this.canDeleteAccount$ = this._userDataService
+        this._userDataService
           .hasDeletionPermission()
           .pipe(
             first(),
             map(response => response.body),
-            map(body => body?.canDeleteAccount)
-          );
+            map(body => body?.canDeleteAccount),
+            tap(result => this.canDeleteAccount = result ?? false)
+          ).subscribe();
+      else
+        this.canDeleteAccount = true;
     })
   }
   openPasswordModal() {

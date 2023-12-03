@@ -6,6 +6,10 @@ section {
     padding: 50px;
     width: 1000px;
 
+    @media (max-width: 1050px) {
+      width: unset;
+    }
+
     .header {
       margin-bottom: 1rem;
     }

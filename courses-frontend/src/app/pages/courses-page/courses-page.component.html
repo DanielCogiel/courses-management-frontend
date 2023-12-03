@@ -1,10 +1,11 @@
 <section>
   <h1>{{ isPersonalPage ? 'Moje kursy' : 'Lista kursów' }}</h1>
   <div class="container">
+    <app-courses-filters (onFilterApplied)="applyFilters($event)"></app-courses-filters>
     <ng-container *ngIf="!loading else loadingTemplate">
       <div class="tile-grid" *ngIf="data?.length; else noDataTemplate">
         <app-course
-          *ngFor="let course of data"
+          *ngFor="let course of getFilteredCourses()"
           [data]="course"
           (onDelete)="openConfirmationModal(course.id)"
           (onEnroll)="course.isEnrolled ? leaveUserFromCourse(course.id) : enrollUserToCourse(course.id)"

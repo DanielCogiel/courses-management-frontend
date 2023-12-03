@@ -8,8 +8,8 @@
     </mat-form-field>
 
     <div class="col-md-3 file-uploader">
-      <input id="fileInput" type="file" (change)="chooseImage($event)">
-      <label for="fileInput">Wybierz obraz</label>
+      <input id="fileInput" type="file" accept=".jpg,.png" (change)="chooseImage($event)">
+      <label matTooltip="Dozwolone rozszerzenia: PNG, JPG" for="fileInput">Wybierz obraz</label>
     </div>
   </div>
 
@@ -67,9 +67,14 @@
   <button (click)="openLessonDialog()" color="primary" mat-raised-button>Dodaj lekcję</button>
 </div>
 
-<mat-chip-set>
-  <mat-chip *ngFor="let date of datetimes; let i = index" (removed)="deleteDate(i)" color="accent">
-    {{ date.date + ' ' + date.timeStart + ' - ' + date.timeFinish }}
+<mat-chip-set class="mb-1">
+  <mat-chip
+    *ngFor="let lesson of lessons; let i = index"
+    (removed)="deleteLesson(i)"
+    (click)="editLesson(i)"
+  >
+    <strong>{{ lesson.title }}</strong>
+    <span>{{ ' (' + lesson.date + ' ' + lesson.timeStart + ' - ' + lesson.timeFinish + ')' }}</span>
     <button matChipRemove><mat-icon>cancel</mat-icon></button>
   </mat-chip>
 </mat-chip-set>

@@ -8,11 +8,14 @@ import { ErrorHandlerForm } from "../../../errors/custom-errors";
 import passwordMatchValidator from "../../../validators/password-match.validator";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
+import {
+  PasswordStrengthCheckerComponent
+} from "../../../components/password-strength-checker/password-strength-checker.component";
 
 @Component({
   selector: 'app-password-change-modal',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, MatDialogModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatButtonModule, MatIconModule, PasswordStrengthCheckerComponent],
   templateUrl: './password-change-modal.component.html',
   styles: [`
     form {

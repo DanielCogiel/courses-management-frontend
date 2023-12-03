@@ -8,6 +8,9 @@ import { Language } from "../../data-access/language/language.enum";
 import { UserCreateModel } from "./models/user-create-edit.model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { dateFormatter } from "../../utility/date-formatter.function";
+import { MatDialog } from "@angular/material/dialog";
+import { ConfirmationModalComponent } from "../../components/confirmation-modal/confirmation-modal.component";
+import { sortLessons } from "../../utility/sort-lessons.function";
 
 @Component({
   selector: 'app-course-create-edit',
@@ -38,7 +41,8 @@ export class CourseCreateEditComponent {
     private _courseService: CourseCreateEditService,
     private _snackbar: MatSnackBar,
     private _route: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private _modalService: MatDialog
   ) {
     const id = this._route.snapshot.paramMap.get('id');
     if (id) {
@@ -78,7 +82,6 @@ export class CourseCreateEditComponent {
 
     let formData = new FormData();
     const {image, ...values} = this.formGroup.getRawValue();
-
     formData.append('image', image);
     formData.append('datetimes', JSON.stringify(this.datetimes));
     Object.entries(values).forEach(([key, value]) => {
@@ -98,8 +101,8 @@ export class CourseCreateEditComponent {
           duration: 5 * 1000
         })
         this._router.navigate(['kursy']);
-      }, error: (response: {message: string}) => {
-        this._snackbar.open(response.message || 'Nie udało się dodać kursu.', 'Zamknij', {
+      }, error: (error) => {
+        this._snackbar.open(error.error.message || 'Nie udało się dodać kursu.', 'Zamknij', {
           duration: 5 * 1000
         })
       }
@@ -132,11 +135,30 @@ export class CourseCreateEditComponent {
             duration: 5 * 1000
           })
           this._router.navigate(['kursy']);
-        }, error: (response: {message: string}) => {
-          this._snackbar.open(response.message || 'Nie udało się dodać kursu.', 'Zamknij', {
+        }, error: (error) => {
+          this._snackbar.open(error.error.message || 'Nie udało się dodać kursu.', 'Zamknij', {
             duration: 5 * 1000
           })
         }
       })
+  }
+  backClicked() {
+    if (this.formGroup.dirty || this._courseService.lessonsDirty$.getValue()) {
+      const confirmationModal = this._modalService.open(ConfirmationModalComponent, {
+        data: {
+          title: 'Potwierdź decyzję',
+          message: 'Czy na pewno chcesz zakończyć edycję kursu? Utracisz wszystkie zmiany.'
+        }
+      })
+      confirmationModal
+        .afterClosed()
+        .pipe(first())
+        .subscribe(result => {
+          if (result)
+            this._router.navigate(['kursy']);
+        })
+    } else {
+      this._router.navigate(['kursy'])
+    }
   }
 }

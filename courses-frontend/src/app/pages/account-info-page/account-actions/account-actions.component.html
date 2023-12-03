@@ -5,7 +5,7 @@
     Zmień hasło
   </button>
   <button
-    [disabled]="!(canDeleteAccount$ | async)"
+    [disabled]="!canDeleteAccount"
     (click)="openConfirmationDialog()"
     color="warn"
     mat-fab
