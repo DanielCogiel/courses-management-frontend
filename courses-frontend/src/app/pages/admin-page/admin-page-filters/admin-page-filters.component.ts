@@ -12,7 +12,15 @@ import { MatButtonModule } from "@angular/material/button";
   standalone: true,
   imports: [CommonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatSelectModule, MatButtonModule],
   templateUrl: './admin-page-filters.component.html',
-  styleUrls: ['./admin-page-filters.component.scss']
+  styles: [`
+    .button-container {
+      padding: 0 12px;
+      button {
+        width: 100%;
+        height: 56px !important;
+      }
+    }
+  `]
 })
 export class AdminPageFiltersComponent {
   formGroup: FormGroup = this._fb.group({

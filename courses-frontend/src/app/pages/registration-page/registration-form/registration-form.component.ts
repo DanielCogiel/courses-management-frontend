@@ -15,8 +15,7 @@ import {
   selector: 'app-registration-form',
   standalone: true,
   imports: [CommonModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, ReactiveFormsModule, PasswordStrengthCheckerComponent],
-  templateUrl: './registration-form.component.html',
-  styleUrls: ['./registration-form.component.scss']
+  templateUrl: './registration-form.component.html'
 })
 export class RegistrationFormComponent extends ErrorHandlerForm {
   @Input() formGroup?: FormGroup;

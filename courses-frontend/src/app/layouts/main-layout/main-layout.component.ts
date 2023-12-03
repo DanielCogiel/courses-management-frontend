@@ -7,9 +7,6 @@ import { HeaderModule } from "../../components/header/header.module";
   selector: 'app-main-layout',
   standalone: true,
   imports: [CommonModule, RouterOutlet, HeaderModule],
-  templateUrl: './main-layout.component.html',
-  styleUrls: ['./main-layout.component.scss']
+  templateUrl: './main-layout.component.html'
 })
-export class MainLayoutComponent {
-
-}
+export class MainLayoutComponent {}

@@ -10,7 +10,6 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { dateFormatter } from "../../utility/date-formatter.function";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmationModalComponent } from "../../components/confirmation-modal/confirmation-modal.component";
-import { sortLessons } from "../../utility/sort-lessons.function";
 
 @Component({
   selector: 'app-course-create-edit',

@@ -1,9 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { MatTableModule } from "@angular/material/table";
-import { ApiService } from "../../api/api.service";
 import User from "../../data-access/user/user.model";
-import { BehaviorSubject, finalize, first, map, Subject, switchMap, takeUntil, tap } from "rxjs";
+import { BehaviorSubject, first, map, Subject, switchMap, takeUntil, tap } from "rxjs";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { LoaderComponent } from "../../components/loader/loader.component";

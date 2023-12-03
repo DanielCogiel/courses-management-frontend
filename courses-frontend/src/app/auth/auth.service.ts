@@ -1,18 +1,15 @@
 import { Injectable } from '@angular/core';
 import Role from "../data-access/role/role.enum";
 import { ApiService } from "../api/api.service";
-import { CookieService } from "ngx-cookie-service";
 import { RoleService } from "../data-access/role/role.service";
 import { UserDataService } from "../data-access/user/user-data.service";
 import { Router } from "@angular/router";
-
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   constructor(
     private _apiService: ApiService,
-    private _cookieService: CookieService,
     private _roleService: RoleService,
     private _userDataService: UserDataService,
     private _router: Router
@@ -30,12 +27,8 @@ export class AuthService {
   destroyAccessToken() {
     localStorage.removeItem('token');
   }
-  clearRefreshToken() {
-    this._cookieService.delete('refresh-token');
-  }
   logout() {
     this.destroyAccessToken();
-    this.clearRefreshToken();
     this._roleService.setRole(null);
     this._router.navigate(['login']);
   }

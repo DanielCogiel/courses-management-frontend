@@ -1,18 +1,16 @@
 import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from "@angular/material/button";
-import { ApiService } from "../../api/api.service";
-import { filter, finalize, first, map, Observable, Subject, switchMap, takeUntil, tap } from "rxjs";
+import { first, map, Observable, Subject, switchMap, takeUntil, tap } from "rxjs";
 import CourseModel from "./course/course.model";
 import { CoursesPageService } from "./courses-page.service";
 import { CourseComponent } from "./course/course.component";
 import { LoaderComponent } from "../../components/loader/loader.component";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Router, RouterLink } from "@angular/router";
+import { Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmationModalComponent } from "../../components/confirmation-modal/confirmation-modal.component";
 import { CoursesFiltersComponent, CoursesFiltersModel } from "./courses-filters/courses-filters.component";
-import User from "../../data-access/user/user.model";
 
 @Component({
   selector: 'app-courses-page',
