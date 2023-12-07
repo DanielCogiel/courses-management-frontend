@@ -1,5 +1,15 @@
 <section>
   <div class="left-section">
+
+    <button
+      *ngIf="isMobile$ | async"
+      mat-mini-fab
+      class="side-menu"
+      (click)="sidebarOpened = !sidebarOpened"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+
     <img src="assets/images/student.svg" alt="Logo">
     <h1>Kursy 2.0</h1>
   </div>
@@ -33,6 +43,7 @@
         [routerLink]="'kursy'"
         mat-mini-fab
         matTooltip="Wszystkie kursy"
+        class="mobile-button"
       >
         <mat-icon>list</mat-icon>
       </button>
@@ -40,6 +51,7 @@
         [routerLink]="'kursy/moje'"
         mat-mini-fab
         matTooltip="Moje kursy"
+        class="mobile-button"
       >
         <mat-icon>checklist</mat-icon>
       </button>
@@ -48,6 +60,7 @@
         mat-mini-fab
         [routerLink]="'kursy/utworz'"
         matTooltip="Dodaj kurs"
+        class="mobile-button"
       >
         <mat-icon>playlist_add</mat-icon>
       </a>
@@ -56,6 +69,7 @@
         [routerLink]="'panel'"
         mat-mini-fab
         matTooltip="Panel administracyjny"
+        class="mobile-button"
       >
         <mat-icon>admin_panel_settings</mat-icon>
       </button>
@@ -72,3 +86,7 @@
     </button>
   </div>
 </section>
+
+<app-sidebar *ngIf="sidebarOpened">
+
+</app-sidebar>

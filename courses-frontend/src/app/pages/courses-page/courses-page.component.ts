@@ -11,6 +11,7 @@ import { Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmationModalComponent } from "../../components/confirmation-modal/confirmation-modal.component";
 import { CoursesFiltersComponent, CoursesFiltersModel } from "./courses-filters/courses-filters.component";
+import Correlation from "./courses-filters/correlation.enum";
 
 @Component({
   selector: 'app-courses-page',
@@ -177,9 +178,25 @@ export class CoursesPageComponent implements OnDestroy {
     }
     return dataYear < today.getFullYear();
   }
+  private _getCourseCorrelation(course: CourseModel, corr: Correlation) {
+    switch(corr) {
+      case Correlation.OWNER:
+        return course.isOwner;
+      case Correlation.TRAINER:
+        return course.isTrainer;
+      case Correlation.STUDENT:
+        return course.isEnrolled;
+    }
+  }
   getFilteredCourses() {
-    const filteredWithStatus = this.data?.filter((course: CourseModel) => {
-      const today = new Date();
+    const filteredWithCorrelation = this.data?.filter((course: CourseModel) => {
+      if (!this.filters.correlation)
+        return true;
+
+      return this._getCourseCorrelation(course, this.filters.correlation);
+    })
+
+    const filteredWithStatus = filteredWithCorrelation?.filter((course: CourseModel) => {
       if (this.filters.status === null || this.filters.status === undefined)
         return true;
 

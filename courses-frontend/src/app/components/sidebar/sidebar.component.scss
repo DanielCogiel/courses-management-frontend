@@ -1,0 +1,15 @@
+.sidebar {
+  width: 200px;
+  position: absolute;
+  top: 91px;
+  left: 0;
+  background-color: white;
+  z-index: 100;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  row-gap: 30px;
+  padding: 20px 10px;
+  border-bottom-right-radius: 30px;
+  box-shadow: 2px 2px 5px gray;
+}

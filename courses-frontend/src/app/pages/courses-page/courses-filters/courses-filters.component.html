@@ -14,6 +14,14 @@
       <mat-icon matPrefix (click)="clearField('level')">close</mat-icon>
     </mat-form-field>
 
+    <mat-form-field class="col">
+      <mat-label>Powiązanie</mat-label>
+      <mat-select formControlName="correlation">
+        <mat-option *ngFor="let key of getCorrelationKeys()" [value]="key">{{ getCorrelationLabel(key) }}</mat-option>
+      </mat-select>
+      <mat-icon matPrefix (click)="clearField('correlation')">close</mat-icon>
+    </mat-form-field>
+
     <div class="button-container col-md-2">
       <button
         mat-raised-button

@@ -1,0 +1,36 @@
+<div class="sidebar">
+  <button
+    [routerLink]="'kursy'"
+    mat-mini-fab
+    matTooltip="Wszystkie kursy"
+    matTooltipPosition="above"
+  >
+    <mat-icon>list</mat-icon>
+  </button>
+  <button
+    [routerLink]="'kursy/moje'"
+    mat-mini-fab
+    matTooltip="Moje kursy"
+    matTooltipPosition="above"
+  >
+    <mat-icon>checklist</mat-icon>
+  </button>
+  <a
+    *hasRoles="['ADMIN', 'CREATOR']"
+    mat-mini-fab
+    [routerLink]="'kursy/utworz'"
+    matTooltip="Dodaj kurs"
+    matTooltipPosition="above"
+  >
+    <mat-icon>playlist_add</mat-icon>
+  </a>
+  <button
+    *hasRoles="['ADMIN']"
+    [routerLink]="'panel'"
+    mat-mini-fab
+    matTooltip="Panel administracyjny"
+    matTooltipPosition="above"
+  >
+    <mat-icon>admin_panel_settings</mat-icon>
+  </button>
+</div>

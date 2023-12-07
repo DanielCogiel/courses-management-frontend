@@ -12,7 +12,8 @@ interface CourseModel {
   location: string,
   image_path: string,
   isOwner: boolean,
-  isEnrolled: boolean
+  isEnrolled: boolean,
+  isTrainer: boolean,
   firstLesson?: CourseLessonModel,
   lastLesson?: CourseLessonModel
 }

@@ -43,3 +43,14 @@ section {
     }
   }
 }
+
+@media(max-width: 660px) {
+  .mobile-button {
+    display: none;
+  }
+}
+@media(min-width: 660px) {
+  .side-menu {
+    display: none;
+  }
+}
