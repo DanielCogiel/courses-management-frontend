@@ -8,7 +8,11 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 @Component({
   selector: 'app-add-lesson-modal',
   templateUrl: './add-lesson-modal.component.html',
-  styleUrls: ['./add-lesson-modal.component.scss'],
+  styles: [`
+    .lesson-row {
+      margin-bottom: 1.2rem;
+    }
+  `],
   providers: [MatSnackBar]
 })
 export class AddLessonModalComponent extends ErrorHandlerForm {

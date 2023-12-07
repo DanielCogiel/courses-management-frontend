@@ -12,6 +12,7 @@ import { MobileCheckService } from "../../mobile/mobile-check.service";
 })
 export class HeaderComponent {
   isMobile$ = this._mobileService.isMobile$;
+  sidebarOpened: boolean = false;
   constructor(
     private _auth: AuthService,
     private _router: Router,

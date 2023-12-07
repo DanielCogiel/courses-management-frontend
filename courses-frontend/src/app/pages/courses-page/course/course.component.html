@@ -2,8 +2,12 @@
   <div class="image-section">
     <img [src]="getImageUrl()">
     <div class="sign-section">
-      <button mat-raised-button (click)="enrollClicked()">
-        {{ data.isEnrolled ? 'Wypisz się' : 'Zapisz się'}}
+      <button
+        mat-raised-button
+        (click)="enrollClicked()"
+        [disabled]="isFinished()"
+      >
+        {{ data.isEnrolled ? 'Wypisz się' : 'Zapisz się' }}
         <mat-icon iconPositionEnd>{{ data.isEnrolled ? 'logout' : 'library_add_check'}}</mat-icon>
       </button>
     </div>
@@ -26,7 +30,7 @@
           matTooltip="Edytuj"
           matTooltipPosition="above"
           mat-mini-fab
-          *ngIf="data.isOwner"
+          *ngIf="data.isOwner && !isFinished()"
           (click)="editClicked()"
           [routerLink]="'/kursy/edytuj/' + data.id"
           [relativeTo]="null"
@@ -42,19 +46,19 @@
     </div>
     <div class="details-section">
       <div class="element">
-        <mat-icon>supervisor_account</mat-icon>
+        <mat-icon matTooltip="Trener">supervisor_account</mat-icon>
         <strong>{{data.firstName + ' ' + data.lastName}}</strong>
       </div>
       <div class="element">
-        <mat-icon>language</mat-icon>
+        <mat-icon matTooltip="Język">language</mat-icon>
         <strong>{{getLanguageLabel(data.language)}}</strong>
       </div>
       <div class="element">
-        <mat-icon>bar_chart</mat-icon>
+        <mat-icon matTooltip="Poziom">bar_chart</mat-icon>
         <strong>{{getLevelLabel(data.level)}}</strong>
       </div>
       <div class="element">
-        <mat-icon>location_pin</mat-icon>
+        <mat-icon matTooltip="Lokalizacja">location_pin</mat-icon>
         <strong>{{data.location}}</strong>
       </div>
     </div>
@@ -78,6 +82,14 @@
       *ngIf="data.isEnrolled"
     >
       <mat-icon>school</mat-icon>
+    </div>
+    <div
+      matTooltip="Jesteś trenerem"
+      matTooltipPosition="above"
+      class="badge"
+      *ngIf="data.isTrainer"
+    >
+      <mat-icon>emoji_people</mat-icon>
     </div>
   </div>
 </div>

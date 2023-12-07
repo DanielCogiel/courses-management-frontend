@@ -1,18 +1,17 @@
 import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from "@angular/material/button";
-import { ApiService } from "../../api/api.service";
-import { filter, finalize, first, map, Observable, Subject, switchMap, takeUntil, tap } from "rxjs";
+import { first, map, Observable, Subject, switchMap, takeUntil, tap } from "rxjs";
 import CourseModel from "./course/course.model";
 import { CoursesPageService } from "./courses-page.service";
 import { CourseComponent } from "./course/course.component";
 import { LoaderComponent } from "../../components/loader/loader.component";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Router, RouterLink } from "@angular/router";
+import { Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { ConfirmationModalComponent } from "../../components/confirmation-modal/confirmation-modal.component";
 import { CoursesFiltersComponent, CoursesFiltersModel } from "./courses-filters/courses-filters.component";
-import User from "../../data-access/user/user.model";
+import Correlation from "./courses-filters/correlation.enum";
 
 @Component({
   selector: 'app-courses-page',
@@ -179,9 +178,25 @@ export class CoursesPageComponent implements OnDestroy {
     }
     return dataYear < today.getFullYear();
   }
+  private _getCourseCorrelation(course: CourseModel, corr: Correlation) {
+    switch(corr) {
+      case Correlation.OWNER:
+        return course.isOwner;
+      case Correlation.TRAINER:
+        return course.isTrainer;
+      case Correlation.STUDENT:
+        return course.isEnrolled;
+    }
+  }
   getFilteredCourses() {
-    const filteredWithStatus = this.data?.filter((course: CourseModel) => {
-      const today = new Date();
+    const filteredWithCorrelation = this.data?.filter((course: CourseModel) => {
+      if (!this.filters.correlation)
+        return true;
+
+      return this._getCourseCorrelation(course, this.filters.correlation);
+    })
+
+    const filteredWithStatus = filteredWithCorrelation?.filter((course: CourseModel) => {
       if (this.filters.status === null || this.filters.status === undefined)
         return true;
 
