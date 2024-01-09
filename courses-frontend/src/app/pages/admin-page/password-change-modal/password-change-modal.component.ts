@@ -26,8 +26,8 @@ import {
 export class PasswordChangeModalComponent extends ErrorHandlerForm {
   @Input() context: 'mine' | 'user' = 'user';
   formGroup: FormGroup = this._fb.group({
-    password: ['', [Validators.required, Validators.maxLength(60)]],
-    confirmPassword: ['', [Validators.required, Validators.maxLength(60), passwordMatchValidator]],
+    password: ['', [Validators.required, Validators.maxLength(60), Validators.pattern(/^(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])(?=.*\d)(?=.*[A-Z]).{8,}$/)]],
+    confirmPassword: ['', [Validators.required, Validators.maxLength(60), passwordMatchValidator, Validators.pattern(/^(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])(?=.*\d)(?=.*[A-Z]).{8,}$/)]],
   }, {updateOn: 'blur'});
   constructor(
     private _fb: FormBuilder,
