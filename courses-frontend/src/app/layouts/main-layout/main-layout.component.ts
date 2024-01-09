@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from "@angular/router";
+import { Router, RouterOutlet } from "@angular/router";
 import { HeaderModule } from "../../components/header/header.module";
 
 @Component({
@@ -9,4 +9,9 @@ import { HeaderModule } from "../../components/header/header.module";
   imports: [CommonModule, RouterOutlet, HeaderModule],
   templateUrl: './main-layout.component.html'
 })
-export class MainLayoutComponent {}
+export class MainLayoutComponent {
+  constructor(private _router: Router) {
+    if (this._router.url === '/')
+      this._router.navigate(['kursy']);
+  }
+}
